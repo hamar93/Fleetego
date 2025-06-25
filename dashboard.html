@@ -1,0 +1,4643 @@
+
+<!-- Begin file: fleetego_dashboard(1).html -->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>FleetEgo Agent Office - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #00a0db;
+            --accent-color: #ff6b6b;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050816;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --sidebar-width: 320px;
+            --success: #00ff88;
+            --warning: #ffb800;
+            --danger: #ff4757;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a1a3e 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300d4aa" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-20px) translateY(-20px); }
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-right: 2px solid var(--glass-border);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transform: translateX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-280px);
+        }
+
+        .sidebar-header {
+            padding: 2.5rem 2rem;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 160, 219, 0.15));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: headerShimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes headerShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            animation: logoFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(-8px) rotate(-2deg); }
+        }
+
+        .logo-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .sidebar-nav {
+            padding: 1.5rem 0;
+        }
+
+        .menu-item {
+            margin: 0.8rem 1.5rem;
+        }
+
+        .menu-toggle {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 1.5rem;
+            text-align: left;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.2);
+        }
+
+        .menu-toggle.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            transform: translateX(8px);
+        }
+
+        .menu-icon {
+            margin-right: 1.2rem;
+            width: 22px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            margin-top: 0.8rem;
+        }
+
+        .submenu.active {
+            max-height: 600px;
+        }
+
+        .submenu-item {
+            padding: 1.2rem 1.5rem 1.2rem 4rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin: 0.4rem;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .submenu-item:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(12px);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.2);
+        }
+
+        .submenu-item.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            transform: translateX(12px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-height: 100vh;
+            transition: margin-left 0.4s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 40px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-bottom: 2px solid var(--glass-border);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: var(--glass-bg);
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            animation: avatarGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4); }
+            50% { box-shadow: 0 12px 40px rgba(0, 212, 170, 0.6); }
+        }
+
+        .logout-btn {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 71, 87, 0.4);
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 3rem;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.15), transparent);
+            animation: shimmer 5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1
+<!-- End file: fleetego_dashboard(1).html -->
+
+<!-- Begin file: fleetego_dashboard(2).html -->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>FleetEgo Agent Office - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #00a0db;
+            --accent-color: #ff6b6b;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050816;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --sidebar-width: 320px;
+            --success: #00ff88;
+            --warning: #ffb800;
+            --danger: #ff4757;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a1a3e 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300d4aa" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-20px) translateY(-20px); }
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-right: 2px solid var(--glass-border);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transform: translateX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-280px);
+        }
+
+        .sidebar-header {
+            padding: 2.5rem 2rem;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 160, 219, 0.15));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: headerShimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes headerShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            animation: logoFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(-8px) rotate(-2deg); }
+        }
+
+        .logo-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .sidebar-nav {
+            padding: 1.5rem 0;
+        }
+
+        .menu-item {
+            margin: 0.8rem 1.5rem;
+        }
+
+        .menu-toggle {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 1.5rem;
+            text-align: left;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.2);
+        }
+
+        .menu-toggle.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            transform: translateX(8px);
+        }
+
+        .menu-icon {
+            margin-right: 1.2rem;
+            width: 22px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            margin-top: 0.8rem;
+        }
+
+        .submenu.active {
+            max-height: 600px;
+        }
+
+        .submenu-item {
+            padding: 1.2rem 1.5rem 1.2rem 4rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin: 0.4rem;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .submenu-item:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(12px);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.2);
+        }
+
+        .submenu-item.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            transform: translateX(12px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-height: 100vh;
+            transition: margin-left 0.4s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 40px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-bottom: 2px solid var(--glass-border);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: var(--glass-bg);
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            animation: avatarGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4); }
+            50% { box-shadow: 0 12px 40px rgba(0, 212, 170, 0.6); }
+        }
+
+        .logout-btn {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 71, 87, 0.4);
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 3rem;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.15), transparent);
+            animation: shimmer 5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* AI Messages */
+        .ai-messages {
+            margin-bottom: 3rem;
+        }
+
+        .ai-message {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .ai-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .ai-message:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 212, 170, 0.3);
+        }
+
+        .ai-message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .close-ai {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+        }
+
+        .close-ai:hover {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+            transform: scale(1.2);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 212, 170, 0.3);
+            border-color: rgba(0, 212, 170, 0.5);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 800;
+        }
+
+        .stat-change.positive {
+            background: rgba(0, 255, 136, 0.25);
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            background: rgba(255, 71, 87, 0.25);
+            color: var(--danger);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            height: 700px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 160, 219, 0.1));
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            animation: messageSlideIn 0.5s ease;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message.sent .message-bubble {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            animation: messageSentSlideIn 0.5s ease;
+        }
+
+        @keyframes messageSentSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message-bubble {
+            background: var(--glass-bg);
+            padding: 1.2rem 1.8rem;
+            border-radius: 20px;
+            max-width: 75%;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-input {
+            padding: 2rem;
+            border-top: 2px solid var(--glass-border);
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 1.2rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.3);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .chat-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Search Results */
+        .search-results {
+            margin-top: 2rem;
+        }
+
+        .search-result-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .search-result-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(8px);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.2);
+        }
+
+        .search-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-result-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .search-result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .result-detail-icon {
+            color: var(--primary-color);
+            font-size: 1rem;
+            width: 16px;
+        }
+
+        .result-detail-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.3);
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.5rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 212, 170, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 2000;
+                width: 100%;
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                padding: 1.5rem;
+            }
+
+            .dashboard-content {
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .user-info span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="logo-text">FleetEgo Agent</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <!-- Dashboard -->
+                <div class="menu-item">
+                    <button class="menu-toggle active" data-section="dashboard">
+                        <span>
+                            <i class="menu-icon fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Timocom -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="timocom">
+                        <span>
+                            <i class="menu-icon fas fa-search"></i>
+                            Timocom
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="timocom-submenu">
+                        <div class="submenu-item" data-section="timocom-search">
+                            <i class="fas fa-search"></i>&nbsp;&nbsp;Fuvar keresés
+                        </div>
+                        <div class="submenu-item" data-section="timocom-offers">
+                            <i class="fas fa-file-contract"></i>&nbsp;&nbsp;Ajánlataim
+                        </div>
+                        <div class="submenu-item" data-section="timocom-chat">
+                            <i class="fas fa-comments"></i>&nbsp;&nbsp;AI Chat
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fuvarkezelés -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="shipments">
+                        <span>
+                            <i class="menu-icon fas fa-truck-loading"></i>
+                            Fuvarkezelés
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="shipments-submenu">
+                        <div class="submenu-item" data-section="active-shipments">
+                            <i class="fas fa-road"></i>&nbsp;&nbsp;Aktív fuvarok
+                        </div>
+                        <div class="submenu-item" data-section="shipment-planning">
+                            <i class="fas fa-route"></i>&nbsp;&nbsp;Útvonaltervezés
+                        </div>
+                        <div class="submenu-item" data-section="tracking">
+                            <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Nyomon követés
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Járműflotta -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="fleet">
+                        <span>
+                            <i class="menu-icon fas fa-truck"></i>
+                            Járműflotta
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="fleet-submenu">
+                        <div class="submenu-item" data-section="vehicles">
+                            <i class="fas fa-truck"></i>&nbsp;&nbsp;Járművek
+                        </div>
+                        <div class="submenu-item" data-section="drivers">
+                            <i class="fas fa-user-tie"></i>&nbsp;&nbsp;Sofőrök
+                        </div>
+                        <div class="submenu-item" data-section="maintenance">
+                            <i class="fas fa-tools"></i>&nbsp;&nbsp;Karbantartás
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jelentések -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="reports">
+                        <span>
+                            <i class="menu-icon fas fa-chart-bar"></i>
+                            Jelentések
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="reports-submenu">
+                        <div class="submenu-item" data-section="financial-reports">
+                            <i class="fas fa-euro-sign"></i>&nbsp;&nbsp;Pénzügyi jelentések
+                        </div>
+                        <div class="submenu-item" data-section="performance-reports">
+                            <i class="fas fa-chart-line"></i>&nbsp;&nbsp;Teljesítmény
+                        </div>
+                        <div class="submenu-item" data-section="analytics">
+                            <i class="fas fa-analytics"></i>&nbsp;&nbsp;Analitika
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Asszisztens -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-section="ai-assistant">
+                        <span>
+                            <i class="menu-icon fas fa-robot"></i>
+                            AI Asszisztens
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Beállítások -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="settings">
+                        <span>
+                            <i class="menu-icon fas fa-cog"></i>
+                            Beállítások
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="settings-submenu">
+                        <div class="submenu-item" data-section="profile">
+                            <i class="fas fa-user"></i>&nbsp;&nbsp;Profil
+                        </div>
+                        <div class="submenu-item" data-section="integrations">
+                            <i class="fas fa-plug"></i>&nbsp;&nbsp;Integrációk
+                        </div>
+                        <div class="submenu-item" data-section="notifications">
+                            <i class="fas fa-bell"></i>&nbsp;&nbsp;Értesítések
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Header -->
+            <header class="header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="menu-toggle-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="header-title" id="headerTitle">Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <span>Admin Felhasználó</span>
+                    <div class="user-avatar">A</div>
+                    <a href="index.html" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Kijelentkezés
+                    </a>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Dashboard Section -->
+                <section class="content-section active" id="dashboard-section">
+                    <div class="welcome-section">
+                        <h2 class="welcome-title">Üdvözöljük a FleetEgo Agent Office-ban!</h2>
+                        <p class="welcome-subtitle">AI-alapú fuvarszervező és TMS rendszer a hatékony logisztikai menedzsmentért</p>
+                        
+                        <div class="ai-messages">
+                            <div class="ai-message">
+                                <div class="ai-message-header">
+                                    <div class="ai-badge">
+                                        <i class="fas fa-robot"></i>
+                                        AI Asszisztens
+                                    </div>
+                                    <button class="close-ai" onclick="this.parentElement.parentElement.style.display='none'">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <p>Jó napot! Segítek megtalálni a legjobb fuvarokat a Timocom platformon. Mondja el, milyen típusú szállítást keres, és én automatikusan leszűröm és rangosolom az ajánlatokat az Ön kritériumai szerint.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #00d4aa, #00a0db);">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="stat-change positive">+12%</div>
+                            </div>
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Aktív fuvarok</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #ff6b6b, #ff4757);">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="stat-change positive">+8%</div>
+                            </div>
+                            <div class="stat-value">€485K</div>
+                            <div class="stat-label">Havi bevétel</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #ffb800, #ff9900);">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <div class="stat-change positive">+15%</div>
+                            </div>
+                            <div class="stat-value">98.2%</div>
+                            <div class="stat-label">Időben teljesítés</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #00ff88, #00cc77);">
+                                    <i class="fas fa-gas-pump"></i>
+                                </div>
+                                <div class="stat-change negative">-5%</div>
+                            </div>
+                            <div class="stat-value">7.2L</div>
+                            <div class="stat-label">Átlag fogyasztás</div>
+                        </div>
+                    </div>
+                </section>
+<!-- End file: fleetego_dashboard(2).html -->
+
+<!-- Begin file: fleetego_dashboard(3).html -->
+                </section>
+
+                <!-- Timocom Search Section -->
+                <section class="content-section" id="timocom-search-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Timocom Fuvar Keresés</h2>
+                        <p class="card-subtitle">AI-alapú fuvarkeresés és optimalizálás a Timocom platformon</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="origin">Indulási hely</label>
+                                <input type="text" id="origin" placeholder="Város, irányítószám vagy ország">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Célállomás</label>
+                                <input type="text" id="destination" placeholder="Város, irányítószám vagy ország">
+                            </div>
+                            <div class="form-group">
+                                <label for="cargo-type">Rakomány típusa</label>
+                                <select id="cargo-type">
+                                    <option value="">Válasszon...</option>
+                                    <option value="general">Általános rakomány</option>
+                                    <option value="refrigerated">Hűtött</option>
+                                    <option value="hazardous">Veszélyes</option>
+                                    <option value="oversized">Túlméretes</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle-type">Jármű típus</label>
+                                <select id="vehicle-type">
+                                    <option value="">Válasszon...</option>
+                                    <option value="truck">Kamion</option>
+                                    <option value="van">Furgon</option>
+                                    <option value="trailer">Pótkocsi</option>
+                                    <option value="mega">Mega trailer</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="searchTimocom()">
+                            <i class="fas fa-search"></i>
+                            AI Keresés Indítása
+                        </button>
+                        
+                        <div class="search-results" id="searchResults" style="display: none;">
+                            <h3>Találatok (AI által rangsorolva)</h3>
+                            
+                            <div class="search-result-card">
+                                <div class="search-result-header">
+                                    <div class="search-result-badge">Kiváló ajánlat</div>
+                                    <div style="color: var(--success); font-weight: 600;">95% AI Match</div>
+                                </div>
+                                <h4>Budapest → München</h4>
+                                <div class="search-result-details">
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-euro-sign"></i>
+                                        <span class="result-detail-text">€1,850</span>
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-weight-hanging"></i>
+                                        <span class="result-detail-text">22 tonna</span>
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-calendar"></i>
+                                        <span class="result-detail-text">2025-06-28</span>
+                                    <!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>FleetEgo Agent Office - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #00a0db;
+            --accent-color: #ff6b6b;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050816;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --sidebar-width: 320px;
+            --success: #00ff88;
+            --warning: #ffb800;
+            --danger: #ff4757;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a1a3e 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300d4aa" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-20px) translateY(-20px); }
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-right: 2px solid var(--glass-border);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transform: translateX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-280px);
+        }
+
+        .sidebar-header {
+            padding: 2.5rem 2rem;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 160, 219, 0.15));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: headerShimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes headerShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            animation: logoFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(-8px) rotate(-2deg); }
+        }
+
+        .logo-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .sidebar-nav {
+            padding: 1.5rem 0;
+        }
+
+        .menu-item {
+            margin: 0.8rem 1.5rem;
+        }
+
+        .menu-toggle {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 1.5rem;
+            text-align: left;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.2);
+        }
+
+        .menu-toggle.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            transform: translateX(8px);
+        }
+
+        .menu-icon {
+            margin-right: 1.2rem;
+            width: 22px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            margin-top: 0.8rem;
+        }
+
+        .submenu.active {
+            max-height: 600px;
+        }
+
+        .submenu-item {
+            padding: 1.2rem 1.5rem 1.2rem 4rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin: 0.4rem;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .submenu-item:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(12px);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.2);
+        }
+
+        .submenu-item.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            transform: translateX(12px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-height: 100vh;
+            transition: margin-left 0.4s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 40px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-bottom: 2px solid var(--glass-border);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: var(--glass-bg);
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            animation: avatarGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4); }
+            50% { box-shadow: 0 12px 40px rgba(0, 212, 170, 0.6); }
+        }
+
+        .logout-btn {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 71, 87, 0.4);
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 3rem;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.15), transparent);
+            animation: shimmer 5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* AI Messages */
+        .ai-messages {
+            margin-bottom: 3rem;
+        }
+
+        .ai-message {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .ai-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .ai-message:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 212, 170, 0.3);
+        }
+
+        .ai-message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .close-ai {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+        }
+
+        .close-ai:hover {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+            transform: scale(1.2);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 212, 170, 0.3);
+            border-color: rgba(0, 212, 170, 0.5);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 800;
+        }
+
+        .stat-change.positive {
+            background: rgba(0, 255, 136, 0.25);
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            background: rgba(255, 71, 87, 0.25);
+            color: var(--danger);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            height: 700px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 160, 219, 0.1));
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            animation: messageSlideIn 0.5s ease;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message.sent .message-bubble {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            animation: messageSentSlideIn 0.5s ease;
+        }
+
+        @keyframes messageSentSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message-bubble {
+            background: var(--glass-bg);
+            padding: 1.2rem 1.8rem;
+            border-radius: 20px;
+            max-width: 75%;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-input {
+            padding: 2rem;
+            border-top: 2px solid var(--glass-border);
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 1.2rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.3);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .chat-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Search Results */
+        .search-results {
+            margin-top: 2rem;
+        }
+
+        .search-result-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .search-result-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(8px);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.2);
+        }
+
+        .search-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-result-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .search-result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .result-detail-icon {
+            color: var(--primary-color);
+            font-size: 1rem;
+            width: 16px;
+        }
+
+        .result-detail-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.3);
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.5rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 212, 170, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 2000;
+                width: 100%;
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                padding: 1.5rem;
+            }
+
+            .dashboard-content {
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .user-info span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="logo-text">FleetEgo Agent</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <!-- Dashboard -->
+                <div class="menu-item">
+                    <button class="menu-toggle active" data-section="dashboard">
+                        <span>
+                            <i class="menu-icon fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Timocom -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="timocom">
+                        <span>
+                            <i class="menu-icon fas fa-search"></i>
+                            Timocom
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="timocom-submenu">
+                        <div class="submenu-item" data-section="timocom-search">
+                            <i class="fas fa-search"></i>&nbsp;&nbsp;Fuvar keresés
+                        </div>
+                        <div class="submenu-item" data-section="timocom-offers">
+                            <i class="fas fa-file-contract"></i>&nbsp;&nbsp;Ajánlataim
+                        </div>
+                        <div class="submenu-item" data-section="timocom-chat">
+                            <i class="fas fa-comments"></i>&nbsp;&nbsp;AI Chat
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fuvarkezelés -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="shipments">
+                        <span>
+                            <i class="menu-icon fas fa-truck-loading"></i>
+                            Fuvarkezelés
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="shipments-submenu">
+                        <div class="submenu-item" data-section="active-shipments">
+                            <i class="fas fa-road"></i>&nbsp;&nbsp;Aktív fuvarok
+                        </div>
+                        <div class="submenu-item" data-section="shipment-planning">
+                            <i class="fas fa-route"></i>&nbsp;&nbsp;Útvonaltervezés
+                        </div>
+                        <div class="submenu-item" data-section="tracking">
+                            <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Nyomon követés
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Járműflotta -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="fleet">
+                        <span>
+                            <i class="menu-icon fas fa-truck"></i>
+                            Járműflotta
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="fleet-submenu">
+                        <div class="submenu-item" data-section="vehicles">
+                            <i class="fas fa-truck"></i>&nbsp;&nbsp;Járművek
+                        </div>
+                        <div class="submenu-item" data-section="drivers">
+                            <i class="fas fa-user-tie"></i>&nbsp;&nbsp;Sofőrök
+                        </div>
+                        <div class="submenu-item" data-section="maintenance">
+                            <i class="fas fa-tools"></i>&nbsp;&nbsp;Karbantartás
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jelentések -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="reports">
+                        <span>
+                            <i class="menu-icon fas fa-chart-bar"></i>
+                            Jelentések
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="reports-submenu">
+                        <div class="submenu-item" data-section="financial-reports">
+                            <i class="fas fa-euro-sign"></i>&nbsp;&nbsp;Pénzügyi jelentések
+                        </div>
+                        <div class="submenu-item" data-section="performance-reports">
+                            <i class="fas fa-chart-line"></i>&nbsp;&nbsp;Teljesítmény
+                        </div>
+                        <div class="submenu-item" data-section="analytics">
+                            <i class="fas fa-analytics"></i>&nbsp;&nbsp;Analitika
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Asszisztens -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-section="ai-assistant">
+                        <span>
+                            <i class="menu-icon fas fa-robot"></i>
+                            AI Asszisztens
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Beállítások -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="settings">
+                        <span>
+                            <i class="menu-icon fas fa-cog"></i>
+                            Beállítások
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="settings-submenu">
+                        <div class="submenu-item" data-section="profile">
+                            <i class="fas fa-user"></i>&nbsp;&nbsp;Profil
+                        </div>
+                        <div class="submenu-item" data-section="integrations">
+                            <i class="fas fa-plug"></i>&nbsp;&nbsp;Integrációk
+                        </div>
+                        <div class="submenu-item" data-section="notifications">
+                            <i class="fas fa-bell"></i>&nbsp;&nbsp;Értesítések
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Header -->
+            <header class="header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="menu-toggle-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="header-title" id="headerTitle">Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <span>Admin Felhasználó</span>
+                    <div class="user-avatar">A</div>
+                    <a href="index.html" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Kijelentkezés
+                    </a>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Dashboard Section -->
+                <section class="content-section active" id="dashboard-section">
+                    <div class="welcome-section">
+                        <h2 class="welcome-title">Üdvözöljük a FleetEgo Agent Office-ban!</h2>
+                        <p class="welcome-subtitle">AI-alapú fuvarszervező és TMS rendszer a hatékony logisztikai menedzsmentért</p>
+                        
+                        <div class="ai-messages">
+                            <div class="ai-message">
+                                <div class="ai-message-header">
+                                    <div class="ai-badge">
+                                        <i class="fas fa-robot"></i>
+                                        AI Asszisztens
+                                    </div>
+                                    <button class="close-ai" onclick="this.parentElement.parentElement.style.display='none'">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <p>Jó napot! Segítek megtalálni a legjobb fuvarokat a Timocom platformon. Mondja el, milyen típusú szállítást keres, és én automatikusan leszűröm és rangosolom az ajánlatokat az Ön kritériumai szerint.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #00d4aa, #00a0db);">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="stat-change positive">+12%</div>
+                            </div>
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Aktív fuvarok</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #ff6b6b, #ff4757);">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="stat-change positive">+8%</div>
+                            </div>
+                            <div class="stat-value">€485K</div>
+                            <div class="stat-label">Havi bevétel</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #ffb800, #ff9900);">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <div class="stat-change positive">+15%</div>
+                            </div>
+                            <div class="stat-value">98.2%</div>
+                            <div class="stat-label">Időben teljesítés</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #00ff88, #00cc77);">
+                                    <i class="fas fa-gas-pump"></i>
+                                </div>
+                                <div class="stat-change negative">-5%</div>
+                            </div>
+                            <div class="stat-value">7.2L</div>
+                            <div class="stat-label">Átlag fogyasztás</div>
+                        </div>
+                    </div>
+                </section>
+<!-- End file: fleetego_dashboard(3).html -->
+
+<!-- Begin file: fleetego_dashboard(4).html -->
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-route"></i>
+                                        <span class="result-detail-text">820 km</span>
+                                    </div>
+                                </div>
+                                <button class="btn">
+                                    <i class="fas fa-handshake"></i>
+                                    Ajánlat Küldése
+                                </button>
+                            </div>
+                            
+                            <div class="search-result-card">
+                                <div class="search-result-header">
+                                    <div class="search-result-badge">Jó ajánlat</div>
+                                    <div style="color: var(--warning); font-weight: 600;">78% AI Match</div>
+                                </div>
+                                <h4>Győr → Bécs</h4>
+                                <div class="search-result-details">
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-euro-sign"></i>
+                                        <span class="result-detail-text">€920</span>
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-weight-hanging"></i>
+                                        <span class="result-detail-text">18 tonna</span>
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-calendar"></i>
+                                        <span class="result-detail-text">2025-06-29</span>
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-route"></i>
+                                        <span class="result-detail-text">320 km</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary">
+                                    <i class="fas fa-eye"></i>
+                                    Részletek
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Timocom Offers Section -->
+                <section class="content-section" id="timocom-offers-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Ajánlataim</h2>
+                        <p class="card-subtitle">Timocom platformon leadott ajánlatok követése</p>
+                        
+                        <div class="search-result-card">
+                            <div class="search-result-header">
+                                <div class="search-result-badge" style="background: var(--success);">Elfogadva</div>
+                                <div style="color: var(--success); font-weight: 600;">2025-06-25 14:30</div>
+                            </div>
+                            <h4>Debrecen → Prága</h4>
+                            <p>Építőanyag szállítás - 24 tonna</p>
+                            <div class="search-result-details">
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-euro-sign"></i>
+                                    <span class="result-detail-text">€1,650 (elfogadott)</span>
+                                </div>
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-truck"></i>
+                                    <span class="result-detail-text">HU-123-AB</span>
+                                </div>
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-user"></i>
+                                    <span class="result-detail-text">Kovács József</span>
+                                </div>
+                            </div>
+                            <button class="btn">
+                                <i class="fas fa-eye"></i>
+                                Fuvar Részletei
+                            </button>
+                        </div>
+                        
+                        <div class="search-result-card">
+                            <div class="search-result-header">
+                                <div class="search-result-badge" style="background: var(--warning);">Várakozás</div>
+                                <div style="color: var(--warning); font-weight: 600;">2025-06-25 16:45</div>
+                            </div>
+                            <h4>Szeged → Stuttgart</h4>
+                            <p>Elektronikai alkatrészek - 12 tonna</p>
+                            <div class="search-result-details">
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-euro-sign"></i>
+                                    <span class="result-detail-text">€2,100 (ajánlat)</span>
+                                </div>
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-clock"></i>
+                                    <span class="result-detail-text">Válasz: 2 óra</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-edit"></i>
+                                Ajánlat Módosítása
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Timocom Chat Section -->
+                <section class="content-section" id="timocom-chat-section">
+                    <div class="content-card">
+                        <h2 class="card-title">AI Chat - Timocom Asszisztens</h2>
+                        <p class="card-subtitle">Beszélgessen az AI-val a fuvarkeresésről és optimalizálásról</p>
+                        
+                        <div class="chat-container">
+                            <div class="chat-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-robot"></i>
+                                    Timocom AI Asszisztens
+                                </div>
+                                <div style="color: var(--success);">
+                                    <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                                    Online
+                                </div>
+                            </div>
+                            
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message">
+                                    <div class="message-bubble">
+                                        Üdvözlöm! Segítek megtalálni a legjobb fuvarokat a Timocom platformon. Milyen útvonalat keres?
+                                    </div>
+                                </div>
+                                
+                                <div class="message sent">
+                                    <div class="message-bubble">
+                                        Magyarországról Németországba keresek fuvarokat ezen a héten.
+                                    </div>
+                                </div>
+                                
+                                <div class="message">
+                                    <div class="message-bubble">
+                                        Kiváló! Találtam 23 aktív fuvarajánlatot Magyarország-Németország útvonalon. A legjobb ajánlatok:<br><br>
+                                        🚛 Budapest → München: €1,850 (22t)<br>
+                                        🚛 Debrecen → Hamburg: €2,340 (24t)<br>
+                                        🚛 Szeged → Stuttgart: €2,100 (18t)<br><br>
+                                        Melyik érdekes Önnek?
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-input">
+                                <input type="text" id="chatInput" placeholder="Írjon üzenetet...">
+                                <button class="chat-send-btn" onclick="sendMessage()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Active Shipments Section -->
+                <section class="content-section" id="active-shipments-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Aktív Fuvarok</h2>
+                        <p class="card-subtitle">Jelenleg folyamatban lévő szállítások valós idejű követése</p>
+                        
+                        <div class="search-result-card">
+                            <div class="search-result-header">
+                                <div class="search-result-badge" style="background: var(--success);">Úton</div>
+                                <div style="color: var(--success); font-weight: 600;">ETA: 14:30</div>
+                            </div>
+                            <h4>Budapest → München</h4>
+                            <div class="search-result-details">
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-truck"></i>
+                                    <span class="result-detail-text">HU-456-CD (Nagy Péter)</span>
+                                </div>
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-map-marker-alt"></i>
+                                    <span class="result-detail-text">Salzburg (85% kész)</span>
+                                </div>
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-phone"></i>
+                                    <span class="result-detail-text">+36 30 123 4567</span>
+                                </div>
+                            </div>
+                            <button class="btn">
+                                <i class="fas fa-map"></i>
+                                Térkép Megtekintése
+                            </button>
+                        </div>
+
+                        <div class="search-result-card">
+                            <div class="search-result-header">
+                                <div class="search-result-badge" style="background: var(--warning);">Késés</div>
+                                <div style="color: var(--danger); font-weight: 600;">+45 perc</div>
+                            </div>
+                            <h4>Győr → Bécs</h4>
+                            <div class="search-result-details">
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-truck"></i>
+                                    <span class="result-detail-text">HU-789-EF (Szabó Gábor)</span>
+                                </div>
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-exclamation-triangle"></i>
+                                    <span class="result-detail-text">Forgalmi dugó (A4)</span>
+                                </div>
+                                <div class="result-detail-item">
+                                    <i class="result-detail-icon fas fa-clock"></i>
+                                    <span class="result-detail-text">Új ETA: 16:15</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-phone"></i>
+                                Sofőr Hívása
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI Assistant Section -->
+                <section class="content-section" id="ai-assistant-section">
+                    <div class="content-card">
+                        <h2 class="card-title">AI Asszisztens</h2>
+                        <p class="card-subtitle">Intelligens fuvarszervező asszisztens minden kérdésére</p>
+                        
+                        <div class="chat-container">
+                            <div class="chat-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-brain"></i>
+                                    FleetEgo AI
+                                </div>
+                                <div style="color: var(--success);">
+                                    <i class="fas fa-circle" style="font-size: 0.5rem;"></i>
+                                    Aktív
+                                </div>
+                            </div>
+                            
+                            <div class="chat-messages" id="aiChatMessages">
+                                <div class="message">
+                                    <div class="message-bubble">
+                                        Üdvözlöm! FleetEgo AI vagyok. Segítek a fuvarszervezésben, útvonaltervezésben, költségoptimalizálásban és minden logisztikai kérdésben. Miben segíthetek?
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-input">
+                                <input type="text" id="aiChatInput" placeholder="Kérdezzen bármit a fuvarszervezésről...">
+                                <button class="chat-send-btn" onclick="sendAIMessage()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Other sections placeholders -->
+                <section class="content-section" id="shipment-planning-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Útvonaltervezés</h2>
+                        <p class="card-subtitle">AI-alapú útvonaloptimalizálás és tervezés</p>
+                        <p>Itt található az intelligens útvonaltervező rendszer...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="tracking-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Nyomon Követés</h2>
+                        <p class="card-subtitle">Valós idejű GPS nyomon követés és monitoring</p>
+                        <p>Itt láthatók a járművek valós idejű pozíciói...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="vehicles-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Járművek</h2>
+                        <p class="card-subtitle">Flotta menedzsment és jármű információk</p>
+                        <p>Itt kezelhetők a járművek adatai...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="drivers-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Sofőrök</h2>
+                        <p class="card-subtitle">Sofőr menedzsment és munkaidő nyilvántartás</p>
+                        <p>Itt kezelhetők a sofőrök adatai...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="maintenance-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Karbantartás</h2>
+                        <p class="card-subtitle">Jármű karbantartás ütemezés és nyilvántartás</p>
+                        <p>Itt kezelhető a karbantartási terv...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="financial-reports-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Pénzügyi Jelentések</h2>
+                        <p class="card-subtitle">Bevételek, költségek és profitabilitás elemzése</p>
+                        <p>Itt találhatók a pénzügyi kimutatások...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="performance-reports-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Teljesítmény Jelentések</h2>
+                        <p class="card-subtitle">KPI-k, hatékonyság és teljesítmény metrikák</p>
+                        <p>Itt követhetők a teljesítmény mutatók...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="analytics-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Analitika</h2>
+                        <p class="card-subtitle">Részletes adatelemzés és előrejelzések</p>
+                        <p>Itt találhatók a részletes analitikai jelentések...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="profile-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Profil Beállítások</h2>
+                        <p class="card-subtitle">Felhasználói fiók és személyes adatok kezelése</p>
+                        <p>Itt módosíthatók a profil beállítások...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="integrations-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Integrációk</h2>
+                        <p class="card-subtitle">Külső rendszerek kapcsolása és API beállítások</p>
+                        <p>Itt kezelhetők a külső integrációk...</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="notifications-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Értesítések</h2>
+                        <p class="card-subtitle">Push értesítések és email beállítások</p>
+                        <p>Itt állíthatók be az értesítési preferenciák...</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global variables
+        let sidebarCollapsed = false;
+        let currentSection = 'dashboard';
+
+        // Menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMenu();
+            showSection('dashboard');
+        });
+
+        function initializeMenu() {
+            // Menu toggle buttons
+            document.querySelectorAll('.menu-toggle').forEach(button => {
+                button.addEventListener('click', function() {
+                    const toggle = this.dataset.toggle;
+                    const section = this.dataset.section;
+                    
+                    if (toggle) {
+                        toggleSubmenu(toggle);
+                    } else if (section) {
+                        showSection(section);
+                        setActiveMenu(this);
+                    }
+                });
+            });
+
+            // Submenu items
+            document.querySelectorAll('.submenu-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.dataset.section;
+                    if (section) {
+                        showSection(section);
+                        setActiveSubmenu(this);
+                    }
+                });
+            });
+        }
+
+        function toggleSubmenu(submenuId) {
+            const submenu = document.getElementById(submenuId + '-submenu');
+            const toggle = document.querySelector(`[data-toggle="${submenuId}"]`);
+            
+            if (submenu && toggle) {
+                submenu.classList.toggle('active');
+                const icon = toggle.querySelector('.fa-chevron-down');
+                if (icon) {
+                    icon.style.transform = submenu.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            }
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId + '-section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+                currentSection = sectionId;
+                updateHeaderTitle(sectionId);
+            }
+        }
+
+        function setActiveMenu(menuElement) {
+            // Remove active class from all menu toggles
+            document.querySelectorAll('.menu-toggle').forEach(toggle => {
+                toggle.classList.remove('active');
+            });
+            
+            // Add active class to clicked menu
+            menuElement.classList.add('active');
+            
+            // Remove active class from all submenu items
+            document.querySelectorAll('.submenu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+
+        function setActiveSubmenu(submenuElement) {
+            // Remove active class from all menu toggles
+            document.querySelectorAll('.menu-toggle').forEach(toggle => {
+                toggle.classList.remove('active');
+            });
+            
+            // Remove active class from all submenu items
+            document.querySelectorAll('.submenu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked submenu item
+            submenuElement.classList.add('active');
+        }
+
+        function updateHeaderTitle(sectionId) {
+            const titles = {
+                'dashboard': 'Dashboard',
+                'timocom-search': 'Timocom - Fuvar Keresés',
+                'timocom-offers': 'Timocom - Ajánlataim',
+                'timocom-chat': 'Timocom - AI Chat',
+                'active-shipments': 'Aktív Fuvarok',
+                'shipment-planning': 'Útvonaltervezés',
+                'tracking': 'Nyomon Követés',
+                'vehicles': 'Járművek',
+                'drivers': 'Sofőrök',
+                'maintenance': 'Karbantartás',
+                'financial-reports': 'Pénzügyi Jelentések',
+                'performance-reports': 'Teljesítmény Jelentések',
+                'analytics': 'Analitika',
+                'ai-assistant': 'AI Asszisztens',
+                'profile': 'Profil',
+                'integrations': 'Integrációk',
+                'notifications': 'Értesítések'
+            };
+            
+            const headerTitle = document.getElementById('headerTitle');
+            if (headerTitle && titles[sectionId]) {
+                headerTitle.textContent = titles[sectionId];
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebarCollapsed = !sidebarCollapsed;
+            
+            if (sidebarCollapsed) {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('expanded');
+            } else {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('expanded');
+            }
+        }
+
+        // Timocom search functionality
+        function searchTimocom() {
+            const searchResults = document.getElementById('searchResults');
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            // Show loading state
+            btn.innerHTML = '<div class="loading"></div> Keresés...';
+            btn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                searchResults.style.display = 'block';
+                searchResults.scrollIntoView({ behavior: 'smooth' });
+                
+                // Reset button
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+
+        // Chat functionality
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message sent';
+                userMessage.innerHTML = `<div class="message-bubble">${message}</div>`;
+                messages.appendChild(userMessage);
+                
+                // Clear input
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const aiMessage = document.createElement('div');
+                    aiMessage.className = 'message';
+                    aiMessage.innerHTML = `<div class="message-bubble">Értem! Segítek megtalálni a legjobb fuvarokat az Ön kritériumai szerint. Egy pillanat...</div>`;
+                    messages.appendChild(aiMessage);
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1000);
+                
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiChatInput');
+            const messages = document.getElementById('aiChatMessages');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message sent';
+                userMessage.innerHTML = `<div class="message-bubble">${message}</div>`;
+                messages.appendChild(userMessage);
+                
+                // Clear input
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const responses = [
+                        "Kiváló kérdés! Az AI-alapú útvonaltervezés 15-25% költségmegtakarítást eredményezhet.",
+                        "A FleetEgo rendszer valós időben optimalizálja az útvonalakat a forgalmi helyzet alapján.",
+                        "Segítek megtalálni a legjobb fuvarokat. Milyen útvonalon és mikor tervez szállítást?",
+                        "A Timocom integráció automatikusan leszűri és rangsorolja az ajánlatokat az Ön kritériumai szerint."
+                    ];
+                    
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    const aiMessage = document.createElement('div');
+                    aiMessage.className = 'message';
+                    aiMessage.innerHTML = `<div class="message-bubble">${randomResponse}</div>`;
+                    messages.appendChild(aiMessage);
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1500);
+                
+                messages.scrollTop = messages.scrollHeight;
+            }
+        }
+
+        // Enter key support for chat inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.getElementById('chatInput');
+            const aiChatInput = document.getElementById('aiChatInput');
+            
+            if (chatInput) {
+                chatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+            
+            if (aiChatInput) {
+                aiChatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendAIMessage();
+                    }
+                });
+            }
+        });
+
+        // Mobile responsiveness
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.add('mobile-open');
+            }
+        });
+    </script>
+</body>
+</html>
+
+                <!-- Timocom Search Section -->
+                <section class="content-section" id="timocom-search-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Timocom Fuvar Keresés</h2>
+                        <p class="card-subtitle">AI-alapú fuvarkeresés és optimalizálás a Timocom platformon</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="origin">Indulási hely</label>
+                                <input type="text" id="origin" placeholder="Város, irányítószám vagy ország">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Célállomás</label>
+                                <input type="text" id="destination" placeholder="Város, irányítószám vagy ország">
+                            </div>
+                            <div class="form-group">
+                                <label for="cargo-type">Rakomány típusa</label>
+                                <select id="cargo-type">
+                                    <option value="">Válasszon...</option>
+                                    <option value="general">Általános rakomány</option>
+                                    <option value="refrigerated">Hűtött</option>
+                                    <option value="hazardous">Veszélyes</option>
+                                    <option value="oversized">Túlméretes</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle-type">Jármű típus</label>
+                                <select id="vehicle-type">
+                                    <option value="">Válasszon...</option>
+                                    <option value="truck">Kamion</option>
+                                    <option value="van">Furgon</option>
+                                    <option value="trailer">Pótkocsi</option>
+                                    <option value="mega">Mega trailer</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="searchTimocom()">
+                            <i class="fas fa-search"></i>
+                            AI Keresés Indítása
+                        </button>
+                        
+                        <div class="search-results" id="searchResults" style="display: none;">
+                            <h3>Találatok (AI által rangsorolva)</h3>
+                            
+                            <div class="search-result-card">
+                                <div class="search-result-header">
+                                    <div class="search-result-badge">Kiváló ajánlat</div>
+                                    <div style="color: var(--success); font-weight: 600;">95% AI Match</div>
+                                </div>
+                                <h4>Budapest → München</h4>
+                                <div class="search-result-details">
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-euro-sign"></i>
+                                        <span class="result-detail-text">€1,850</span>
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-weight-hanging"></i>
+                                        <span class="result-detail-text">22 tonna</span>
+                                    </div>
+                                    <div class="result-detail-item">
+                                        <i class="result-detail-icon fas fa-calendar"></i>
+                                        <span class="result-detail-text">2025-06-28</span>
+                                    <!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>FleetEgo Agent Office - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #00a0db;
+            --accent-color: #ff6b6b;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050816;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --sidebar-width: 320px;
+            --success: #00ff88;
+            --warning: #ffb800;
+            --danger: #ff4757;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a1a3e 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300d4aa" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-20px) translateY(-20px); }
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-right: 2px solid var(--glass-border);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transform: translateX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-280px);
+        }
+
+        .sidebar-header {
+            padding: 2.5rem 2rem;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 160, 219, 0.15));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: headerShimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes headerShimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            animation: logoFloat 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(-8px) rotate(-2deg); }
+        }
+
+        .logo-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .sidebar-nav {
+            padding: 1.5rem 0;
+        }
+
+        .menu-item {
+            margin: 0.8rem 1.5rem;
+        }
+
+        .menu-toggle {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 1.5rem;
+            text-align: left;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.2);
+        }
+
+        .menu-toggle.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+            transform: translateX(8px);
+        }
+
+        .menu-icon {
+            margin-right: 1.2rem;
+            width: 22px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            margin-top: 0.8rem;
+        }
+
+        .submenu.active {
+            max-height: 600px;
+        }
+
+        .submenu-item {
+            padding: 1.2rem 1.5rem 1.2rem 4rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin: 0.4rem;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .submenu-item:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transform: translateX(12px);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.2);
+        }
+
+        .submenu-item.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            transform: translateX(12px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-height: 100vh;
+            transition: margin-left 0.4s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 40px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border-bottom: 2px solid var(--glass-border);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: var(--glass-bg);
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+            animation: avatarGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4); }
+            50% { box-shadow: 0 12px 40px rgba(0, 212, 170, 0.6); }
+        }
+
+        .logout-btn {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 71, 87, 0.4);
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 3rem;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.15), transparent);
+            animation: shimmer 5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* AI Messages */
+        .ai-messages {
+            margin-bottom: 3rem;
+        }
+
+        .ai-message {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .ai-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .ai-message:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 212, 170, 0.3);
+        }
+
+        .ai-message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.3);
+        }
+
+        .close-ai {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+        }
+
+        .close-ai:hover {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+            transform: scale(1.2);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 212, 170, 0.3);
+            border-color: rgba(0, 212, 170, 0.5);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .stat-change {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 800;
+        }
+
+        .stat-change.positive {
+            background: rgba(0, 255, 136, 0.25);
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            background: rgba(255, 71, 87, 0.25);
+            color: var(--danger);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            height: 700px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            padding: 2rem 2.5rem;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 160, 219, 0.1));
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            animation: messageSlideIn 0.5s ease;
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message.sent .message-bubble {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            animation: messageSentSlideIn 0.5s ease;
+        }
+
+        @keyframes messageSentSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .message-bubble {
+            background: var(--glass-bg);
+            padding: 1.2rem 1.8rem;
+            border-radius: 20px;
+            max-width: 75%;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-input {
+            padding: 2rem;
+            border-top: 2px solid var(--glass-border);
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 1.2rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.3);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .chat-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Search Results */
+        .search-results {
+            margin-top: 2rem;
+        }
+
+        .search-result-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .search-result-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(8px);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.2);
+        }
+
+        .search-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-result-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .search-result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .result-detail-icon {
+            color: var(--primary-color);
+            font-size: 1rem;
+            width: 16px;
+        }
+
+        .result-detail-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.3);
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.5rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 212, 170, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 2000;
+                width: 100%;
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                padding: 1.5rem;
+            }
+
+            .dashboard-content {
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .user-info span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="logo-text">FleetEgo Agent</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <!-- Dashboard -->
+                <div class="menu-item">
+                    <button class="menu-toggle active" data-section="dashboard">
+                        <span>
+                            <i class="menu-icon fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Timocom -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="timocom">
+                        <span>
+                            <i class="menu-icon fas fa-search"></i>
+                            Timocom
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="timocom-submenu">
+                        <div class="submenu-item" data-section="timocom-search">
+                            <i class="fas fa-search"></i>&nbsp;&nbsp;Fuvar keresés
+                        </div>
+                        <div class="submenu-item" data-section="timocom-offers">
+                            <i class="fas fa-file-contract"></i>&nbsp;&nbsp;Ajánlataim
+                        </div>
+                        <div class="submenu-item" data-section="timocom-chat">
+                            <i class="fas fa-comments"></i>&nbsp;&nbsp;AI Chat
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fuvarkezelés -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="shipments">
+                        <span>
+                            <i class="menu-icon fas fa-truck-loading"></i>
+                            Fuvarkezelés
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="shipments-submenu">
+                        <div class="submenu-item" data-section="active-shipments">
+                            <i class="fas fa-road"></i>&nbsp;&nbsp;Aktív fuvarok
+                        </div>
+                        <div class="submenu-item" data-section="shipment-planning">
+                            <i class="fas fa-route"></i>&nbsp;&nbsp;Útvonaltervezés
+                        </div>
+                        <div class="submenu-item" data-section="tracking">
+                            <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Nyomon követés
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Járműflotta -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="fleet">
+                        <span>
+                            <i class="menu-icon fas fa-truck"></i>
+                            Járműflotta
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="fleet-submenu">
+                        <div class="submenu-item" data-section="vehicles">
+                            <i class="fas fa-truck"></i>&nbsp;&nbsp;Járművek
+                        </div>
+                        <div class="submenu-item" data-section="drivers">
+                            <i class="fas fa-user-tie"></i>&nbsp;&nbsp;Sofőrök
+                        </div>
+                        <div class="submenu-item" data-section="maintenance">
+                            <i class="fas fa-tools"></i>&nbsp;&nbsp;Karbantartás
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jelentések -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="reports">
+                        <span>
+                            <i class="menu-icon fas fa-chart-bar"></i>
+                            Jelentések
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="reports-submenu">
+                        <div class="submenu-item" data-section="financial-reports">
+                            <i class="fas fa-euro-sign"></i>&nbsp;&nbsp;Pénzügyi jelentések
+                        </div>
+                        <div class="submenu-item" data-section="performance-reports">
+                            <i class="fas fa-chart-line"></i>&nbsp;&nbsp;Teljesítmény
+                        </div>
+                        <div class="submenu-item" data-section="analytics">
+                            <i class="fas fa-analytics"></i>&nbsp;&nbsp;Analitika
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Asszisztens -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-section="ai-assistant">
+                        <span>
+                            <i class="menu-icon fas fa-robot"></i>
+                            AI Asszisztens
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Beállítások -->
+                <div class="menu-item">
+                    <button class="menu-toggle" data-toggle="settings">
+                        <span>
+                            <i class="menu-icon fas fa-cog"></i>
+                            Beállítások
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="settings-submenu">
+                        <div class="submenu-item" data-section="profile">
+                            <i class="fas fa-user"></i>&nbsp;&nbsp;Profil
+                        </div>
+                        <div class="submenu-item" data-section="integrations">
+                            <i class="fas fa-plug"></i>&nbsp;&nbsp;Integrációk
+                        </div>
+                        <div class="submenu-item" data-section="notifications">
+                            <i class="fas fa-bell"></i>&nbsp;&nbsp;Értesítések
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Header -->
+            <header class="header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="menu-toggle-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="header-title" id="headerTitle">Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <span>Admin Felhasználó</span>
+                    <div class="user-avatar">A</div>
+                    <a href="index.html" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Kijelentkezés
+                    </a>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Dashboard Section -->
+                <section class="content-section active" id="dashboard-section">
+                    <div class="welcome-section">
+                        <h2 class="welcome-title">Üdvözöljük a FleetEgo Agent Office-ban!</h2>
+                        <p class="welcome-subtitle">AI-alapú fuvarszervező és TMS rendszer a hatékony logisztikai menedzsmentért</p>
+                        
+                        <div class="ai-messages">
+                            <div class="ai-message">
+                                <div class="ai-message-header">
+                                    <div class="ai-badge">
+                                        <i class="fas fa-robot"></i>
+                                        AI Asszisztens
+                                    </div>
+                                    <button class="close-ai" onclick="this.parentElement.parentElement.style.display='none'">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <p>Jó napot! Segítek megtalálni a legjobb fuvarokat a Timocom platformon. Mondja el, milyen típusú szállítást keres, és én automatikusan leszűröm és rangosolom az ajánlatokat az Ön kritériumai szerint.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #00d4aa, #00a0db);">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="stat-change positive">+12%</div>
+                            </div>
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Aktív fuvarok</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #ff6b6b, #ff4757);">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="stat-change positive">+8%</div>
+                            </div>
+                            <div class="stat-value">€485K</div>
+                            <div class="stat-label">Havi bevétel</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #ffb800, #ff9900);">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <div class="stat-change positive">+15%</div>
+                            </div>
+                            <div class="stat-value">98.2%</div>
+                            <div class="stat-label">Időben teljesítés</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, #00ff88, #00cc77);">
+                                    <i class="fas fa-gas-pump"></i>
+                                </div>
+                                <div class="stat-change negative">-5%</div>
+                            </div>
+                            <div class="stat-value">7.2L</div>
+                            <div class="stat-label">Átlag fogyasztás</div>
+                        </div>
+                    </div>
+                </section>
+<!-- End file: fleetego_dashboard(4).html -->
