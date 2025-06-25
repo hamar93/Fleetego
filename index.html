@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FleetEgo Agent - AI Fuvarügynök</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <style>
-    /* opcionális extra stílusok ide jöhetnek */
-  </style>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetEgo Agent - AI Fuvarügynök</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -566,6 +562,85 @@
             opacity: 0.8;
         }
 
+        /* Dashboard styles */
+        .dashboard-layout {
+            display: none;
+        }
+
+        .dashboard-layout.active {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 22px;
+            color: #00d4aa;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .sidebar nav a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            color: #00d4aa;
+            font-weight: bold;
+        }
+
+        .dashboard-main {
+            margin-left: 270px;
+            padding: 30px;
+            box-sizing: border-box;
+            flex: 1;
+        }
+
+        .ai-message {
+            background: rgba(0, 212, 170, 0.1);
+            border-left: 5px solid #00d4aa;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .data-table thead {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
         /* Footer */
         .footer {
             background: var(--darker-bg);
@@ -649,6 +724,21 @@
             .modal-content {
                 padding: 2rem;
             }
+
+            .dashboard-main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1001;
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
         }
 
         /* Animations */
@@ -696,222 +786,115 @@
     <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
 
-    <!-- Navigation -->
-    <header class="header" id="header">
-        <nav class="nav">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-truck"></i>
-                </div>
-                FleetEgo Agent
-            </a>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Főoldal</a></li>
-                <li><a href="#features" class="nav-link">Funkciók</a></li>
-                <li><a href="#services" class="nav-link">Szolgáltatások</a></li>
-                <li><a href="#pricing" class="nav-link">Árlista</a></li>
-                <li><a href="#contact" class="nav-link">Kapcsolat</a></li>
-                <li><button class="login-btn" onclick="openLoginModal()">Bejelentkezés</button></li>
-            </ul>
-            
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-rocket"></i>
-                Új generációs fuvarszervező rendszer
-            </div>
-            
-            <h1>FLEETEGO AGENT</h1>
-            <div class="subtitle">AI-alapú fuvarszervező és TMS rendszer</div>
-            <p>Forradalmasítsd a fuvarszervezést mesterséges intelligenciával. Automatizált útvonaltervezés, valós idejű nyomon követés és költségoptimalizálás egy platformon.</p>
-            
-            <div class="cta-buttons">
-                <a href="#" class="btn-primary" onclick="openLoginModal()">
-                    <i class="fas fa-rocket"></i>
-                    Kezdjük el
+    <!-- Landing Page -->
+    <div class="landing-page" id="landingPage">
+        <!-- Navigation -->
+        <header class="header" id="header">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    FleetEgo Agent
                 </a>
-                <a href="#features" class="btn-secondary">
-                    <i class="fas fa-info-circle"></i>
-                    Tudj meg többet
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>+</h3>
-                    <p>Aktív felhasználó</p>
-                </div>
-                <div class="stat-item">
-                    <h3>?%</h3>
-                    <p>Költségcsökkentés</p>
-                </div>
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>Üzemidő</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>Támogatás</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">Miért válaszd a FleetEgo Agent-et?</h2>
-            <p class="section-subtitle">Modern technológiák és AI-alapú megoldások a hatékony fuvarszervezésért</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>AI-alapú Optimalizálás</h3>
-                    <p>Gépi tanulás segítségével optimalizáljuk az útvonalakat, csökkentve a költségeket és a szállítási időt automatikusan.</p>
-                </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Valós idejű Nyomon követés</h3>
-                    <p>Kövesd nyomon a járműveket és szállítmányokat valós időben, GPS alapú helymeghatározással és pontos ETA-val.</p>
-                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link">Főoldal</a></li>
+                    <li><a href="#features" class="nav-link">Funkciók</a></li>
+                    <li><a href="#services" class="nav-link">Szolgáltatások</a></li>
+                    <li><a href="#pricing" class="nav-link">Árlista</a></li>
+                    <li><a href="#contact" class="nav-link">Kapcsolat</a></li>
+                    <li><button class="login-btn" onclick="openLoginModal()">Bejelentkezés</button></li>
+                </ul>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Részletes Jelentések</h3>
-                    <p>Átfogó analitikák és jelentések a teljesítményről, költségekről és hatékonyságról intuitív dashboardon.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Gyors Integráció</h3>
-                    <p>Könnyen integrálható meglévő rendszerekkel modern API-n keresztül, minimális beüzemelési idővel.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Biztonságos Adatkezelés</h3>
-                    <p>Bank-szintű titkosítás és teljes GDPR megfelelőség garantálja az adatok biztonságát.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Automatikus Megrendelések</h3>
-                    <p>AI-alapú megrendelés-kezelés és automatikus fuvarszervezés intelligens algoritmusokkal.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeLoginModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <h2>Bejelentkezés</h2>
-            
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="email">E-mail cím</label>
-                    <input type="email" id="email" name="email" placeholder="pelda@email.com" value="admin" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Jelszó</label>
-                    <input type="password" id="password" name="password" placeholder="••••••••" value="1234" required>
-                    <small style="color: var(--text-secondary); font-size: 0.8rem;">Demo: admin / 1234</small>
-                </div>
-                
-                <button type="submit" class="login-form-btn">
-                    <span class="btn-text">Bejelentkezés</span>
-                    <span class="loading" style="display: none;"></span>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
                 </button>
-                
-                <div class="forgot-password">
-                    <a href="#" onclick="handleForgotPassword()">Elfelejtett jelszó?</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    Új generációs fuvarszervező rendszer
                 </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#terms">ÁSZF</a>
-                <a href="#privacy">Adatvédelem</a>
-                <a href="#help">Súgó</a>
-                <a href="#contact">Kapcsolat</a>
-                <a href="#careers">Karrier</a>
+                
+                <h1>FLEETEGO AGENT</h1>
+                <div class="subtitle">AI-alapú fuvarszervező és TMS rendszer</div>
+                <p>Forradalmasítsd a fuvarszervezést mesterséges intelligenciával. Automatizált útvonaltervezés, valós idejű nyomon követés és költségoptimalizálás egy platformon.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary" onclick="openLoginModal()">
+                        <i class="fas fa-rocket"></i>
+                        Kezdjük el
+                    </a>
+                    <a href="#features" class="btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        Tudj meg többet
+                    </a>
+                </div>
             </div>
-            <p>&copy; 2024 FleetEgo Agent. Minden jog fenntartva.</p>
-            <p>AI-alapú fuvarszervező és TMS rendszer</p>
-        </div>
-    </footer>
+        </section>
 
-    <script>
-      <script>
-function toggleMobileMenu() {
-    const menu = document.getElementById("navMenu");
-    menu.classList.toggle("active");
-}
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Aktív felhasználó</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>35%</h3>
+                        <p>Költségcsökkentés</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>99.9%</h3>
+                        <p>Üzemidő</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Támogatás</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-function openLoginModal() {
-    document.getElementById("loginModal").classList.add("active");
-}
-
-function closeLoginModal() {
-    document.getElementById("loginModal").classList.remove("active");
-}
-
-function handleForgotPassword() {
-    alert("Ez egy demó rendszer – kérlek lépj kapcsolatba a rendszergazdával.");
-}
-
-function handleLogin(event) {
-    event.preventDefault();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const btnText = document.querySelector(".btn-text");
-    const loader = document.querySelector(".loading");
-
-    btnText.style.display = "none";
-    loader.style.display = "inline-block";
-
-    setTimeout(() => {
-        if (email === "admin" && password === "1234") {
-            window.location.href = "dashboard.html";
-        } else {
-            alert("Hibás bejelentkezési adatok!");
-        }
-        btnText.style.display = "inline";
-        loader.style.display = "none";
-    }, 1500);
-}
-</script>
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Miért válaszd a FleetEgo Agent-et?</h2>
+                <p class="section-subtitle">Modern technológiák és AI-alapú megoldások a hatékony fuvarszervezésért</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI-alapú Optimalizálás</h3>
+                        <p>Gépi tanulás segítségével optimalizáljuk az útvonalakat, csökkentve a költségeket és a szállítási időt automatikusan.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Valós idejű Nyomon követés</h3>
+                        <p>Kövesd nyomon a járműveket és szállítmányokat valós időben, GPS alapú helymeghatározással és pontos ETA-val.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Részletes Jelentések</h3>
+                        <p>Átfogó analitikák és jelentések a teljesítményről, költségekről és hatékonyságról intuitív dashboardon.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+     
