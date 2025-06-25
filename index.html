@@ -1,0 +1,3316 @@
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="stat-change positive">+24%</div>
+                                </div>
+                                <div class="stat-value">€21.4K</div>
+                                <div class="stat-label">Heti profit</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--warning), #ff9900);">
+                                        <i class="fas fa-percentage"></i>
+                                    </div>
+                                    <div class="stat-change positive">+2%</div>
+                                </div>
+                                <div class="stat-value">24.0%</div>
+                                <div class="stat-label">Profit margin</div>
+                            </div>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Időszak</th>
+                                    <th>Bevétel</th>
+                                    <th>Kiadás</th>
+                                    <th>Profit</th>
+                                    <th>Margin</th>
+                                    <th>Növekedés</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2025. 25. hét</td>
+                                    <td>€89,234</td>
+                                    <td>€67,812</td>
+                                    <td>€21,422</td>
+                                    <td>24.0%</td>
+                                    <td><span class="stat-change positive">+15%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2025. 24. hét</td>
+                                    <td>€77,589</td>
+                                    <td>€61,234</td>
+                                    <td>€16,355</td>
+                                    <td>21.1%</td>
+                                    <td><span class="stat-change positive">+8%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2025. 23. hét</td>
+                                    <td>€71,892</td>
+                                    <td>€58,477</td>
+                                    <td>€13,415</td>
+                                    <td>18.7%</td>
+                                    <td><span class="stat-change negative">-2%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tachograph Data Section -->
+                <div class="content-section" id="tachograph-data-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Tachográf adatok</h2>
+                        <p class="card-subtitle">Vezetési idők dokumentálása és kiértékelése</p>
+                        
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-microchip"></i>
+                                    Digitális tachográf
+                                </div>
+                            </div>
+                            <p>🔧 Automatikus adatletöltés digitális tachográfokról. EU szabályok szerint értékeli a vezetési időket és pihenőidőket.</p>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Sofőr</th>
+                                    <th>Napi vezetés</th>
+                                    <th>Heti vezetés</th>
+                                    <th>Napi pihenő</th>
+                                    <th>Heti pihenő</th>
+                                    <th>Túlóra</th>
+                                    <th>Státusz</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kovács István</td>
+                                    <td>8h 45m / 9h</td>
+                                    <td>42h 30m / 56h</td>
+                                    <td>11h / 11h</td>
+                                    <td>OK</td>
+                                    <td>0h</td>
+                                    <td><span class="shipment-status status-delivered">Rendben</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Nagy Péter</td>
+                                    <td>9h 15m / 9h</td>
+                                    <td>48h 20m / 56h</td>
+                                    <td>10h 45m / 11h</td>
+                                    <td>OK</td>
+                                    <td>15m</td>
+                                    <td><span class="shipment-status status-warning">Figyelmeztető</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Szabó András</td>
+                                    <td>7h 30m / 9h</td>
+                                    <td>35h 15m / 56h</td>
+                                    <td>12h / 11h</td>
+                                    <td>OK</td>
+                                    <td>0h</td>
+                                    <td><span class="shipment-status status-delivered">Rendben</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CMR Documents Section -->
+                <div class="content-section" id="cmr-documents-section">
+                    <div class="content-card">
+                        <h2 class="card-title">CMR dokumentumok</h2>
+                        <p class="card-subtitle">Fuvar dokumentumok és CMR kezelés</p>
+                        
+                        <button class="btn" onclick="uploadCMR()" style="margin-bottom: 2rem;">
+                            <i class="fas fa-upload"></i>
+                            CMR feltöltése
+                        </button>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>CMR szám</th>
+                                    <th>Dátum</th>
+                                    <th>Útvonal</th>
+                                    <th>Sofőr</th>
+                                    <th>Státusz</th>
+                                    <th>Dokumentum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CMR-2025-001234</td>
+                                    <td>2025.06.24</td>
+                                    <td>Budapest → Berlin</td>
+                                    <td>Kovács István</td>
+                                    <td><span class="shipment-status status-delivered">Leadva</span></td>
+                                    <td><button class="btn-secondary">Letöltés</button></td>
+                                </tr>
+                                <tr>
+                                    <td>CMR-2025-001235</td>
+                                    <td>2025.06.25</td>
+                                    <td>Debrecen → Bécs</td>
+                                    <td>Nagy Péter</td>
+                                    <td><span class="shipment-status status-transit">Úton</span></td>
+                                    <td><button class="btn-secondary">Előnézet</button></td>
+                                </tr>
+                                <tr>
+                                    <td>CMR-2025-001236</td>
+                                    <td>2025.06.25</td>
+                                    <td>Győr → Prága</td>
+                                    <td>Szabó András</td>
+                                    <td><span class="shipment-status status-waiting">Várakozik</span></td>
+                                    <td><button class="btn-secondary">Szerkesztés</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Trip Settlements Section -->
+                <div class="content-section" id="trip-settlements-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Járatelszámolások</h2>
+                        <p class="card-subtitle">Menetlevelek és elszámoló lapok kezelése</p>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Elszámolás ID</th>
+                                    <th>Sofőr</th>
+                                    <th>Időszak</th>
+                                    <th>Útiköltség</th>
+                                    <th>Tankolás</th>
+                                    <th>Parkolás</th>
+                                    <th>Egyéb</th>
+                                    <th>Összesen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ES-2025-156</td>
+                                    <td>Kovács István</td>
+                                    <td>2025. 25. hét</td>
+                                    <td>€450</td>
+                                    <td>€890</td>
+                                    <td>€120</td>
+                                    <td>€85</td>
+                                    <td>€1,545</td>
+                                </tr>
+                                <tr>
+                                    <td>ES-2025-157</td>
+                                    <td>Nagy Péter</td>
+                                    <td>2025. 25. hét</td>
+                                    <td>€380</td>
+                                    <td>€720</td>
+                                    <td>€95</td>
+                                    <td>€45</td>
+                                    <td>€1,240</td>
+                                </tr>
+                                <tr>
+                                    <td>ES-2025-158</td>
+                                    <td>Szabó András</td>
+                                    <td>2025. 25. hét</td>
+                                    <td>€320</td>
+                                    <td>€650</td>
+                                    <td>€110</td>
+                                    <td>€70</td>
+                                    <td>€1,150</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Shipment Orders Section -->
+                <div class="content-section" id="shipment-orders-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Fuvarmegbízások</h2>
+                        <p class="card-subtitle">Megbízói dokumentumok és szerződések</p>
+                        
+                        <button class="btn" onclick="createShipmentOrder()" style="margin-bottom: 2rem;">
+                            <i class="fas fa-plus"></i>
+                            Új megbízás létrehozása
+                        </button>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Megbízás szám</th>
+                                    <th>Megbízó</th>
+                                    <th>Útvonal</th>
+                                    <th>Érték</th>
+                                    <th>Határidő</th>
+                                    <th>Státusz</th>
+                                    <th>Dokumentum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>MB-2025-001</td>
+                                    <td>Metro Kft.</td>
+                                    <td>Budapest → München</td>
+                                    <td>€2,450</td>
+                                    <td>2025.06.26</td>
+                                    <td><span class="shipment-status status-transit">Teljesítés alatt</span></td>
+                                    <td><button class="btn-secondary">PDF</button></td>
+                                </tr>
+                                <tr>
+                                    <td>MB-2025-002</td>
+                                    <td>Tesco Zrt.</td>
+                                    <td>Debrecen → Bécs</td>
+                                    <td>€3,200</td>
+                                    <td>2025.06.26</td>
+                                    <td><span class="shipment-status status-loaded">Felrakva</span></td>
+                                    <td><button class="btn-secondary">PDF</button></td>
+                                </tr>
+                                <tr>
+                                    <td>MB-2025-003</td>
+                                    <td>IKEA AG</td>
+                                    <td>Győr → Prága</td>
+                                    <td>€2,890</td>
+                                    <td>2025.06.27</td>
+                                    <td><span class="shipment-status status-waiting">Várakozik</span></td>
+                                    <td><button class="btn-secondary">PDF</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Invoices PDF Section -->
+                <div class="content-section" id="invoices-pdf-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Számlák PDF</h2>
+                        <p class="card-subtitle">Kifizetett és beérkezett számlák PDF archívuma</p>
+                        
+                        <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                            <button class="btn" onclick="filterInvoices('all')">
+                                <i class="fas fa-list"></i>
+                                Összes
+                            </button>
+                            <button class="btn-secondary" onclick="filterInvoices('paid')">
+                                <i class="fas fa-check-circle"></i>
+                                Kifizetett
+                            </button>
+                            <button class="btn-secondary" onclick="filterInvoices('pending')">
+                                <i class="fas fa-clock"></i>
+                                Függőben
+                            </button>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Számlaszám</th>
+                                    <th>Típus</th>
+                                    <th>Partner</th>
+                                    <th>Összeg</th>
+                                    <th>Dátum</th>
+                                    <th>Státusz</th>
+                                    <th>PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FE-2025-001</td>
+                                    <td>Kimenő</td>
+                                    <td>Metro Kft.</td>
+                                    <td>€2,450</td>
+                                    <td>2025.06.24</td>
+                                    <td><span class="shipment-status status-delivered">Kifizetve</span></td>
+                                    <td><button class="btn-secondary">Letöltés</button></td>
+                                </tr>
+                                <tr>
+                                    <td>MOL-2025-001234</td>
+                                    <td>Bejövő</td>
+                                    <td>MOL Zrt.</td>
+                                    <td>€1,456</td>
+                                    <td>2025.06.23</td>
+                                    <td><span class="shipment-status status-waiting">Függőben</span></td>
+                                    <td><button class="btn-secondary">Letöltés</button></td>
+                                </tr>
+                                <tr>
+                                    <td>FE-2025-002</td>
+                                    <td>Kimenő</td>
+                                    <td>Tesco Zrt.</td>
+                                    <td>€3,200</td>
+                                    <td>2025.06.25</td>
+                                    <td><span class="shipment-status status-transit">Elküldve</span></td>
+                                    <td><button class="btn-secondary">Letöltés</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Legal Guide Section -->
+                <div class="content-section" id="legal-guide-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Jogi kisokos</h2>
+                        <p class="card-subtitle">Fuvarozási jogi tudnivalók és szabályozások</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                            <div style="background: var(--glass-bg); border-radius: 12px; padding: 1.5rem;">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">
+                                    <i class="fas fa-clock"></i> Vezetési idők
+                                </h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>Napi vezetési idő: max. 9 óra</li>
+                                    <li>Heti vezetési idő: max. 56 óra</li>
+                                    <li>Kétheti vezetési idő: max. 90 óra</li>
+                                    <li>Napi pihenőidő: min. 11 óra</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: var(--glass-bg); border-radius: 12px; padding: 1.5rem;">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">
+                                    <i class="fas fa-file-contract"></i> Kötelező dokumentumok
+                                </h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>CMR fuvarlevél</li>
+                                    <li>Sofőr jogosítvány</li>
+                                    <li>Járművezetői kártya</li>
+                                    <li>Műszaki vizsga</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: var(--glass-bg); border-radius: 12px; padding: 1.5rem;">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">
+                                    <i class="fas fa-weight-hanging"></i> Súlykorlátok
+                                </h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>Max. össztömeg: 40 tonna</li>
+                                    <li>Tengelyterhelés: 11.5 tonna</li>
+                                    <li>Túlsúly bírság: €500-2000</li>
+                                    <li>Kötelező mérlegelés</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: var(--glass-bg); border-radius: 12px; padding: 1.5rem;">
+                                <h4 style="color: var(--primary-color); margin-bottom: 1rem;">
+                                    <i class="fas fa-euro-sign"></i> Útdíjak
+                                </h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>Magyarország: HU-GO</li>
+                                    <li>Ausztria: GO-Box</li>
+                                    <li>Németország: Toll Collect</li>
+                                    <li>Csehország: myto</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Inspection Section -->
+                <div class="content-section" id="technical-inspection-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Műszaki vizsga nyilvántartás</h2>
+                        <p class="card-subtitle">Járművek műszaki vizsgáinak követése és lejárat figyelő</p>
+                        
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-bell"></i>
+                                    Lejárat figyelő
+                                </div>
+                            </div>
+                            <p>🔔 Automatikus értesítések 90, 60 és 30 nappal a lejárat előtt. SMS és email riasztások!</p>
+                        </div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Rendszám</th>
+                                    <th>Típus</th>
+                                    <th>Utolsó vizsga</th>
+                                    <th>Következő vizsga</th>
+                                    <th>Hátralévő napok</th>
+                                    <th>Státusz</th>
+                                    <th>Művelet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC-123</td>
+                                    <td>Vontató</td>
+                                    <td>2024.06.15</td>
+                                    <td>2025.06.15</td>
+                                    <td>-10</td>
+                                    <td><span class="shipment-status status-danger">Lejárt</span></td>
+                                    <td><button class="btn">Vizsga időpontja</button></td>
+                                </tr>
+                                <tr>
+                                    <td>GHI-789</td>
+                                    <td>Vontató</td>
+                                    <td>2024.07.20</td>
+                                    <td>2025.07.20</td>
+                                    <td>25</td>
+                                    <td><span class="shipment-status status-warning">Hamarosan</span></td>
+                                    <td><button class="btn-secondary">Emlékeztető</button></td>
+                                </tr>
+                                <tr>
+                                    <td>DEF-456</td>
+                                    <td>Pótkocsi</td>
+                                    <td>2024.09.10</td>
+                                    <td>2025.09.10</td>
+                                    <td>77</td>
+                                    <td><span class="shipment-status status-delivered">Érvényes</span></td>
+                                    <td><button class="btn-secondary">Részletek</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Maintenance Schedule Section -->
+                <div class="content-section" id="maintenance-schedule-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Karbantartási ütemterv</h2>
+                        <p class="card-subtitle">Járművek tervezett karbantartásainak ütemezése</p>
+                        
+                        <button class="btn" onclick="addMaintenanceTask()" style="margin-bottom: 2rem;">
+                            <i class="fas fa-plus"></i>
+                            Új karbantartás ütemezése
+                        </button>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Jármű</th>
+                                    <th>Karbantartás típusa</th>
+                                    <th>Utolsó</th>
+                                    <th>Következő</th>
+                                    <th>Kilométer</th>
+                                    <th>Szolgáltató</th>
+                                    <th>Becsült költség</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC-123</td>
+                                    <td>Nagyszerv.</td>
+                                    <td>2024.12.15</td>
+                                    <td>2025.12.15</td>
+                                    <td>147,890 km</td>
+                                    <td>AutoService Kft.</td>
+                                    <td>€2,500</td>
+                                </tr>
+                                <tr>
+                                    <td>GHI-789</td>
+                                    <td>Kisszerv.</td>
+                                    <td>2025.03.20</td>
+                                    <td>2025.09.20</td>
+                                    <td>89,450 km</td>
+                                    <td>TruckMaster Bt.</td>
+                                    <td>€800</td>
+                                </tr>
+                                <tr>
+                                    <td>DEF-456</td>
+                                    <td>Fékvizs.</td>
+                                    <td>2025.01.10</td>
+                                    <td>2025.07.10</td>
+                                    <td>-</td>
+                                    <td>BrakeExpert Zrt.</td>
+                                    <td>€350</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global state
+        let currentUser = null;
+        let sidebarCollapsed = false;
+        let currentChatUser = 'kovacs';
+        let currentSubcontractorChat = 'transeuro';
+
+        // Login functionality
+        function login(event) {
+            if (event) event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === '1234') {
+                currentUser = { name: 'Admin', role: 'admin' };
+                document.getElementById('loginModal').classList.add('hidden');
+                document.getElementById('dashboard').classList.add('active');
+                showWelcomeMessage();
+            } else {
+                alert('Hibás felhasználónév vagy jelszó!');
+            }
+        }
+
+        // Logout functionality
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('dashboard').classList.remove('active');
+            resetDashboard();
+        }
+
+        // Show welcome message
+        function showWelcomeMessage() {
+            setTimeout(() => {
+                addNotification('Sikeres bejelentkezés!', 'success');
+            }, 500);
+        }
+
+        // Reset dashboard to initial state
+        function resetDashboard() {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('dashboard-section').classList.add('active');
+            
+            document.querySelectorAll('.menu-toggle').forEach(toggle => {
+                toggle.classList.remove('active');
+            });
+            document.querySelectorAll('.submenu').forEach(submenu => {
+                submenu.classList.remove('active');
+            });
+            
+            document.querySelector('[onclick="toggleMenu(\'fuvarok\')"]').classList.add('active');
+            document.getElementById('fuvarok-submenu').classList.add('active');
+        }
+
+        // Toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebarCollapsed = !sidebarCollapsed;
+            
+            if (sidebarCollapsed) {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('expanded');
+            } else {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('expanded');
+            }
+        }
+
+        // Toggle menu
+        function toggleMenu(menuId) {
+            const submenu = document.getElementById(menuId + '-submenu');
+            const toggle = document.querySelector(`[onclick="toggleMenu('${menuId}')"]`);
+            
+            // Close all other menus
+            document.querySelectorAll('.submenu').forEach(menu => {
+                if (menu.id !== menuId + '-submenu') {
+                    menu.classList.remove('active');
+                }
+            });
+            
+            document.querySelectorAll('.menu-toggle').forEach(t => {
+                if (t !== toggle) {
+                    t.classList.remove('active');
+                }
+            });
+            
+            // Toggle current menu
+            submenu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        // Show section
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId + '-section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update active submenu item
+            document.querySelectorAll('.submenu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            
+            // Add animation
+            if (targetSection) {
+                targetSection.style.animation = 'fadeInUp 0.5s ease forwards';
+            }
+        }
+
+        // Close AI message
+        function closeAiMessage(button) {
+            const message = button.closest('.ai-message');
+            message.style.animation = 'fadeOut 0.3s ease forwards';
+            setTimeout(() => {
+                message.remove();
+            }, 300);
+        }
+
+        // Archive completed shipments
+        function archiveCompletedShipments() {
+            addNotification('Befejezett fuvarok archiválva!', 'success');
+        }
+
+        // Upload shipment
+        function uploadShipment() {
+            const apiKey = document.getElementById('api-key').value;
+            const pickupLocation = document.getElementById('pickup-location').value;
+            const deliveryLocation = document.getElementById('delivery-location').value;
+            
+            if (!apiKey || !pickupLocation || !deliveryLocation) {
+                addNotification('Kérjük töltse ki az összes mezőt!', 'error');
+                return;
+            }
+            
+            addNotification('Fuvar feltöltése folyamatban...', 'info');
+            setTimeout(() => {
+                addNotification('Fuvar sikeresen feltöltve a Timocom börzére!', 'success');
+            }, 2000);
+        }
+
+        // Search shipments
+        function searchShipments() {
+            const from = document.getElementById('search-from').value;
+            const to = document.getElementById('search-to').value;
+            
+            if (!from || !to) {
+                addNotification('Adja meg a kiindulási pontot és a célállomást!', 'error');
+                return;
+            }
+            
+            addNotification('Fuvarok keresése...', 'info');
+            
+            setTimeout(() => {
+                const resultsDiv = document.getElementById('search-results');
+                resultsDiv.innerHTML = `
+                    <h4>Találatok (${Math.floor(Math.random() * 15) + 5} db):</h4>
+                    <div class="shipment-card">
+                        <div class="shipment-header">
+                            <div class="shipment-date">Timocom - AI javaslat</div>
+                            <div class="shipment-status status-waiting">Elérhető</div>
+                        </div>
+                        <div class="shipment-details">
+                            <div class="detail-item">
+                                <i class="fas fa-route detail-icon"></i>
+                                <span class="detail-text">${from} → ${to} (${Math.floor(Math.random() * 800) + 400} km)</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-euro-sign detail-icon"></i>
+                                <span class="detail-text">€${Math.floor(Math.random() * 2000) + 1000}</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-weight-hanging detail-icon"></i>
+                                <span class="detail-text">${Math.floor(Math.random() * 20) + 5} tonna</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-truck detail-icon"></i>
+                                <span class="detail-text">Ponyvás kamion</span>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="acceptShipmentOffer()">
+                            <i class="fas fa-check"></i>
+                            Ajánlat elfogadása
+                        </button>
+                    </div>
+                `;
+                addNotification('Fuvarok sikeresen betöltve!', 'success');
+            }, 1500);
+        }
+
+        // Accept shipment offer
+        function acceptShipmentOffer() {
+            addNotification('Fuvar ajánlat elfogadva! Hozzáadva az aktív fuvarokhoz.', 'success');
+        }
+
+        // Plan route
+        function planRoute() {
+            const start = document.getElementById('route-start').value;
+            const end = document.getElementById('route-end').value;
+            
+            if (!start || !end) {
+                addNotification('Adja meg a kiindulási pontot és a célpontot!', 'error');
+                return;
+            }
+            
+            addNotification('Útvonal tervezése...', 'info');
+            
+            setTimeout(() => {
+                document.getElementById('route-results').style.display = 'block';
+                
+                // Random realistic data
+                const distance = Math.floor(Math.random() * 1000) + 200;
+                const time = Math.floor(distance / 80 * 60);
+                const hours = Math.floor(time / 60);
+                const minutes = time % 60;
+                const fuel = Math.floor(distance * 0.35);
+                const tolls = Math.floor(distance * 0.08);
+                
+                document.getElementById('route-distance').textContent = `${distance} km`;
+                document.getElementById('route-time').textContent = `${hours}h ${minutes}m`;
+                document.getElementById('route-fuel').textContent = `€${fuel}`;
+                document.getElementById('route-tolls').textContent = `€${tolls}`;
+                
+                addNotification('Útvonal sikeresen megtervezve!', 'success');
+            }, 2000);
+        }
+
+        // Driver assignment
+        function assignDriver() {
+            const driver = document.getElementById('driver-select').value;
+            const vehicle = document.getElementById('vehicle-select').value;
+            
+            if (!driver || !vehicle) {
+                addNotification('Válasszon sofőrt és járművet!', 'error');
+                return;
+            }
+            
+            addNotification('Sofőr sikeresen hozzárendelve!', 'success');
+        }
+
+        // Generate AI assignments
+        function generateAIAssignments() {
+            addNotification('AI elemzés folyamatban...', 'info');
+            setTimeout(() => {
+                addNotification('AI javaslatok generálva!', 'success');
+            }, 3000);
+        }
+
+        // Accept assignment
+        function acceptAssignment() {
+            addNotification('Fuvar hozzárendelés elfogadva!', 'success');
+        }
+
+        // Reject assignment
+        function rejectAssignment() {
+            addNotification('Fuvar hozzárendelés elutasítva. Új javaslat generálása...', 'warning');
+        }
+
+        // Chat functionality
+        function sendMessage(event) {
+            if (event && event.key !== 'Enter') return;
+            
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add message to chat
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message sent';
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-bottom: 0.25rem;">Te - ${new Date().toLocaleTimeString('hu-HU', {hour: '2-digit', minute: '2-digit'})}</div>
+                    ${message}
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            input.value = '';
+            
+            // Simulate response
+            setTimeout(() => {
+                const responses = [
+                    'Értettem, köszönöm az infót!',
+                    'Rendben, tartom magam ehhez.',
+                    'Oké, jelentkezem ha probléma van.',
+                    'Köszönöm a frissítést!',
+                    'Minden tiszta, folytatom az utat.'
+                ];
+                
+                const responseDiv = document.createElement('div');
+                responseDiv.className = 'message';
+                responseDiv.innerHTML = `
+                    <div class="message-bubble">
+                        <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Kovács István - ${new Date().toLocaleTimeString('hu-HU', {hour: '2-digit', minute: '2-digit'})}</div>
+                        ${responses[Math.floor(Math.random() * responses.length)]}
+                    </div>
+                `;
+                
+                chatMessages.appendChild(responseDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000 + Math.random() * 2000);
+        }
+
+        // Subcontractor chat
+        function sendSubcontractorMessage(event) {
+            if (event && event.key !== 'Enter') return;
+            
+            const input = document.getElementById('subcontractorMessageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addNotification('Üzenet elküldve!', 'success');
+            input.value = '';
+        }
+
+        // Subcontractor functions
+        function assignToSubcontractor() {
+            const subcontractor = document.getElementById('subcontractor-select').value;
+            const route = document.getElementById('shipment-route').value;
+            
+            if (!subcontractor || !route) {
+                addNotification('Válasszon alvállalkozót és adja meg az útvonalat!', 'error');
+                return;
+            }
+            
+            addNotification('Fuvar sikeresen hozzárendelve az alvállalkozóhoz!', 'success');
+        }
+
+        // Invoice functions
+        function uploadInvoice() {
+            addNotification('Számla feltöltő ablak megnyitása...', 'info');
+            setTimeout(() => {
+                addNotification('Számla sikeresen feltöltve és feldolgozva!', 'success');
+            }, 2000);
+        }
+
+        function createNewInvoice() {
+            addNotification('Új számla készítő ablak megnyitása...', 'info');
+        }
+
+        // Partner functions
+        function addNewPartner() {
+            addNotification('Új partner hozzáadása...', 'info');
+        }
+
+        // Profile functions
+        function generateDriverInvite() {
+            const link = `https://fleetego.hu/driver-invite/${Math.random().toString(36).substring(7)}`;
+            navigator.clipboard.writeText(link);
+            addNotification('Sofőr meghívó link vágólapra másolva!', 'success');
+        }
+
+        function generateSubcontractorInvite() {
+            const link = `https://fleetego.hu/subcontractor-invite/${Math.random().toString(36).substring(7)}`;
+            navigator.clipboard.writeText(link);
+            addNotification('Alvállalkozó meghívó link vágólapra másolva!', 'success');
+        }
+
+        function generateAdminInvite() {
+            const link = `https://fleetego.hu/admin-invite/${Math.random().toString(36).substring(7)}`;
+            navigator.clipboard.writeText(link);
+            addNotification('Admin meghívó link vágólapra másolva!', 'success');
+        }
+
+        function generateTrackingLink() {
+            const link = `https://fleetego.hu/track/${Math.random().toString(36).substring(7)}`;
+            navigator.clipboard.writeText(link);
+            addNotification('Nyomkövetési link vágólapra másolva!', 'success');
+        }
+
+        function saveProfile() {
+            addNotification('Profil beállítások mentve!', 'success');
+        }
+
+        // Error management
+        function addNewError() {
+            addNotification('Új hiba jelentő ablak megnyitása...', 'info');
+        }
+
+        // Map loading
+        function loadMap() {
+            addNotification('Térkép betöltése...', 'info');
+            setTimeout(() => {
+                addNotification('Térkép sikeresen betöltve! (Demo verzióban nem elérhető)', 'success');
+            }, 2000);
+        }
+
+        // Document functions
+        function uploadCMR() {
+            addNotification('CMR feltöltése...', 'info');
+        }
+
+        function createShipmentOrder() {
+            addNotification('Új fuvarmegbízás létrehozása...', 'info');
+        }
+
+        function filterInvoices(type) {
+            addNotification(`Számlák szűrése: ${type}`, 'info');
+        }
+
+        function addMaintenanceTask() {
+            addNotification('Új karbantartási feladat hozzáadása...', 'info');
+        }
+
+        // Chat selection
+        function selectChat(driverId) {
+            currentChatUser = driverId;
+            document.querySelectorAll('.chat-contact').forEach(contact => {
+                contact.querySelector('div').style.background = 'transparent';
+            });
+            event.target.closest('.chat-contact').querySelector('div').style.background = 'var(--primary-color)';
+        }
+
+        function selectSubcontractorChat(subcontractorId) {
+            currentSubcontractorChat = subcontractorId;
+            document.querySelectorAll('.chat-contact').forEach(contact => {
+                contact.querySelector('div').style.background = 'transparent';
+            });
+            event.target.closest('.chat-contact').querySelector('div').style.background = 'var(--primary-color)';
+        }
+
+        // Notification system
+        function addNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : type === 'warning' ? 'var(--warning)' : 'var(--primary-color)'};
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                    max-width: 300px;
+                    font-weight: 500;
+                ">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('mobile-open');
+        }
+
+        // Initialize floating particles
+        function initParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            if (!particlesContainer) return;
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Header scroll effect
+        function initHeaderScroll() {
+            const header = document.getElementById('header');
+            if (!header) return;
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Add CSS animations
+        const additionalCSS = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(-20px); }
+            }
+            
+            .particles {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                pointer-events: none;
+            }
+            
+            .particle {
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: var(--primary-color);
+                border-radius: 50%;
+                opacity: 0.6;
+                animation: float 6s ease-in-out infinite;
+            }
+            
+            /* Responsive improvements */
+            @media (max-width: 768px) {
+                .sidebar {
+                    transform: translateX(-100%);
+                    transition: transform 0.3s ease;
+                    z-index: 2000;
+                    width: 280px;
+                }
+                
+                .sidebar.mobile-open {
+                    transform: translateX(0);
+                }
+                
+                .main-content {
+                    margin-left: 0;
+                }
+                
+                .dashboard-content {
+                    padding: 1rem;
+                }
+                
+                .form-grid {
+                    grid-template-columns: 1fr;
+                }
+                
+                .stats-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                }
+                
+                .chat-container {
+                    height: 400px;
+                }
+                
+                .shipment-details {
+                    grid-template-columns: 1fr;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .welcome-section {
+                    padding: 1.5rem;
+                }
+                
+                .welcome-title {
+                    font-size: 1.4rem;
+                }
+                
+                .stats-grid {
+                    grid-template-columns: 1fr;
+                }
+                
+                .data-table {
+                    font-size: 0.85rem;
+                }
+                
+                .data-table th,
+                .data-table td {
+                    padding: 0.75rem 0.5rem;
+                }
+            }
+        `;
+        
+        // Add the additional CSS to head
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalCSS;
+        document.head.appendChild(styleSheet);
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            initHeaderScroll();
+            
+            // Auto-focus on username field
+            const usernameField = document.getElementById('username');
+            if (usernameField) {
+                setTimeout(() => usernameField.focus(), 500);
+            }
+            
+            // Add some demo notifications on load
+            setTimeout(() => {
+                if (!currentUser) {
+                    addNotification('Üdvözöljük a FleetEgo Agent Office-ban!', 'info');
+                }
+            }, 1000);
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Ctrl+L for logout
+            if (event.ctrlKey && event.key === 'l' && currentUser) {
+                event.preventDefault();
+                logout();
+            }
+            
+            // Ctrl+M for menu toggle
+            if (event.ctrlKey && event.key === 'm' && currentUser) {
+                event.preventDefault();
+                toggleSidebar();
+            }
+            
+            // ESC to close modals
+            if (event.key === 'Escape') {
+                const loginModal = document.getElementById('loginModal');
+                if (!loginModal.classList.contains('hidden')) {
+                    // Don't close login modal with ESC
+                    return;
+                }
+            }
+        });
+
+        // Reassign driver function
+        function reassignDriver(driverId) {
+            addNotification(`${driverId} sofőr áthelyezése...`, 'info');
+        }
+
+        // Edit subcontractor function  
+        function editSubcontractor(subcontractorId) {
+            addNotification(`Alvállalkozó szerkesztése: ${subcontractorId}`, 'info');
+        }
+
+        // Add some dynamic content updates
+        setInterval(() => {
+            if (currentUser && document.getElementById('dashboard-section').classList.contains('active')) {
+                // Update random stats occasionally
+                const statValues = document.querySelectorAll('.stat-value');
+                if (Math.random() < 0.1) { // 10% chance every interval
+                    const randomStat = statValues[Math.floor(Math.random() * statValues.length)];
+                    if (randomStat && randomStat.textContent.match(/^\d+$/)) {
+                        const currentValue = parseInt(randomStat.textContent);
+                        const change = Math.random() < 0.7 ? 1 : -1; // 70% chance to increase
+                        randomStat.textContent = Math.max(0, currentValue + change);
+                    }
+                }
+            }
+        }, 10000); // Every 10 seconds
+
+        // Prevent form submission without proper handling
+        document.addEventListener('submit', function(event) {
+            event.preventDefault();
+        });
+
+        console.log('🚀 FleetEgo Agent Office loaded successfully!');
+        console.log('💡 Keyboard shortcuts:');
+        console.log('   Ctrl+L: Logout');
+        console.log('   Ctrl+M: Toggle sidebar');
+        console.log('   Enter: Send message in chat');
+    </script>
+</body>
+</html>
+
+                                    <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="                                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-bottom: 0.25rem;">Te - 09:18</div>
+                                            Igen, van szabad kapacitás! 3 kamion rendben, küldjétek a részleteket emailben.
+                                        </div>
+                                    </div>
+                                    <div class="message">
+                                        <div class="message-bubble">
+                                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Molnár József - 09:22</div>
+                                            Köszönöm! Küldöm 10 percen belül. Mikorra tudtok indulni?
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-input">
+                                    <input type="text" placeholder="Írj üzenetet..." id="subcontractorMessageInput" onkeypress="sendSubcontractorMessage(event)">
+                                    <button class="btn" onclick="sendSubcontractorMessage()">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subcontractor Assignment Section -->
+                <div class="content-section" id="subcontractor-assignment-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Alvállalkozói fuvar hozzárendelés</h2>
+                        <p class="card-subtitle">Fuvarok hozzárendelése alvállalkozói partnerekhez</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="subcontractor-select">Alvállalkozó kiválasztása</label>
+                                <select id="subcontractor-select">
+                                    <option value="">Válasszon alvállalkozót</option>
+                                    <option value="transeuro">TransEuro Kft.</option>
+                                    <option value="fast">FastDelivery Bt.</option>
+                                    <option value="logi">LogiPartner Zrt.</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipment-route">Útvonal</label>
+                                <input type="text" id="shipment-route" placeholder="Budapest → München">
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="shipment-value">Fuvar érték</label>
+                                <input type="number" id="shipment-value" placeholder="2500" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipment-deadline">Határidő</label>
+                                <input type="date" id="shipment-deadline">
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="assignToSubcontractor()">
+                            <i class="fas fa-handshake"></i>
+                            Fuvar hozzárendelése
+                        </button>
+                        
+                        <div style="margin-top: 2rem;">
+                            <h4>Alvállalkozói fuvarok állapota:</h4>
+                            <div class="shipment-card">
+                                <div class="shipment-header">
+                                    <div class="shipment-date">TransEuro Kft. - 2025.06.25</div>
+                                    <div class="shipment-status status-transit">Úton</div>
+                                </div>
+                                <div class="shipment-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-route detail-icon"></i>
+                                        <span class="detail-text">Budapest → Róma (1,234 km)</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-euro-sign detail-icon"></i>
+                                        <span class="detail-text">Érték: €3,450</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incoming Invoices Section -->
+                <div class="content-section" id="incoming-invoices-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Bejövő számlák</h2>
+                        <p class="card-subtitle">AI-alapú számlakezelés és feldolgozás</p>
+                        
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-robot"></i>
+                                    AI Számlafeldolgozó
+                                </div>
+                            </div>
+                            <p>🤖 Az AI automatikusan feldolgozza a beérkező számlákat, kivonatolja az adatokat és kategorizálja őket. OCR technológiával 99.2% pontossággal dolgozik.</p>
+                        </div>
+                        
+                        <button class="btn" onclick="uploadInvoice()" style="margin-bottom: 2rem;">
+                            <i class="fas fa-upload"></i>
+                            Számla feltöltése
+                        </button>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Számlaszám</th>
+                                    <th>Kiállító</th>
+                                    <th>Összeg</th>
+                                    <th>Esedékesség</th>
+                                    <th>Kategória</th>
+                                    <th>Státusz</th>
+                                    <th>Műveletek</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>MOL-2025-001234</td>
+                                    <td>MOL Magyarország Zrt.</td>
+                                    <td>€1,456.78</td>
+                                    <td>2025.07.15</td>
+                                    <td>Üzemanyag</td>
+                                    <td><span class="shipment-status status-waiting">Függőben</span></td>
+                                    <td><button class="btn-secondary">Részletek</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SHELL-2025-5678</td>
+                                    <td>Shell Hungary Kft.</td>
+                                    <td>€892.34</td>
+                                    <td>2025.07.10</td>
+                                    <td>Üzemanyag</td>
+                                    <td><span class="shipment-status status-delivered">Kifizetve</span></td>
+                                    <td><button class="btn-secondary">Részletek</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SRV-2025-9876</td>
+                                    <td>AutoService Kft.</td>
+                                    <td>€2,134.50</td>
+                                    <td>2025.07.20</td>
+                                    <td>Szerviz</td>
+                                    <td><span class="shipment-status status-waiting">Függőben</span></td>
+                                    <td><button class="btn-secondary">Részletek</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Outgoing Invoices Section -->
+                <div class="content-section" id="outgoing-invoices-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Kimenő számlák</h2>
+                        <p class="card-subtitle">Automatikus számlakészítés AI technológiával</p>
+                        
+                        <button class="btn" onclick="createNewInvoice()" style="margin-bottom: 2rem;">
+                            <i class="fas fa-plus"></i>
+                            Új számla készítése
+                        </button>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Számlaszám</th>
+                                    <th>Vevő</th>
+                                    <th>Összeg</th>
+                                    <th>Kiállítás</th>
+                                    <th>Esedékesség</th>
+                                    <th>Státusz</th>
+                                    <th>Műveletek</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FE-2025-001</td>
+                                    <td>Metro Kereskedelmi Kft.</td>
+                                    <td>€2,450.00</td>
+                                    <td>2025.06.24</td>
+                                    <td>2025.07.24</td>
+                                    <td><span class="shipment-status status-delivered">Kifizetve</span></td>
+                                    <td><button class="btn-secondary">PDF</button></td>
+                                </tr>
+                                <tr>
+                                    <td>FE-2025-002</td>
+                                    <td>Tesco-Global Zrt.</td>
+                                    <td>€3,200.00</td>
+                                    <td>2025.06.25</td>
+                                    <td>2025.07.25</td>
+                                    <td><span class="shipment-status status-waiting">Függőben</span></td>
+                                    <td><button class="btn-secondary">PDF</button></td>
+                                </tr>
+                                <tr>
+                                    <td>FE-2025-003</td>
+                                    <td>IKEA Supply AG</td>
+                                    <td>€2,890.00</td>
+                                    <td>2025.06.25</td>
+                                    <td>2025.07.25</td>
+                                    <td><span class="shipment-status status-transit">Elküldve</span></td>
+                                    <td><button class="btn-secondary">PDF</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Partners Section -->
+                <div class="content-section" id="partners-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Partnerek</h2>
+                        <p class="card-subtitle">Ügyfelek és beszállítók kezelése</p>
+                        
+                        <button class="btn" onclick="addNewPartner()" style="margin-bottom: 2rem;">
+                            <i class="fas fa-user-plus"></i>
+                            Új partner hozzáadása
+                        </button>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Cégnév</th>
+                                    <th>Típus</th>
+                                    <th>Kapcsolattartó</th>
+                                    <th>Email</th>
+                                    <th>Telefon</th>
+                                    <th>Fuvarok száma</th>
+                                    <th>Műveletek</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Metro Kereskedelmi Kft.</td>
+                                    <td><span class="shipment-status status-delivered">Ügyfél</span></td>
+                                    <td>Kovács Anna</td>
+                                    <td>kovacs@metro.hu</td>
+                                    <td>+36 1 234 5678</td>
+                                    <td>47</td>
+                                    <td><button class="btn-secondary">Szerkesztés</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Tesco-Global Zrt.</td>
+                                    <td><span class="shipment-status status-delivered">Ügyfél</span></td>
+                                    <td>Nagy Péter</td>
+                                    <td>nagy@tesco.hu</td>
+                                    <td>+36 1 987 6543</td>
+                                    <td>32</td>
+                                    <td><button class="btn-secondary">Szerkesztés</button></td>
+                                </tr>
+                                <tr>
+                                    <td>MOL Magyarország Zrt.</td>
+                                    <td><span class="shipment-status status-warning">Beszállító</span></td>
+                                    <td>Szabó Gábor</td>
+                                    <td>szabo@mol.hu</td>
+                                    <td>+36 1 555 1234</td>
+                                    <td>-</td>
+                                    <td><button class="btn-secondary">Szerkesztés</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div class="content-section" id="profile-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Profil beállítások</h2>
+                        <p class="card-subtitle">Céges profil és rendszerbeállítások</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="company-name">Cégnév</label>
+                                <input type="text" id="company-name" value="FleetEgo Transport Kft.">
+                            </div>
+                            <div class="form-group">
+                                <label for="company-email">Email cím</label>
+                                <input type="email" id="company-email" value="info@fleetego.hu">
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="company-phone">Telefon</label>
+                                <input type="tel" id="company-phone" value="+36 1 234 5678">
+                            </div>
+                            <div class="form-group">
+                                <label for="company-address">Cím</label>
+                                <input type="text" id="company-address" value="1011 Budapest, Batthyány u. 1.">
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 2rem 0;">
+                            <h4>Meghívó linkek generálása:</h4>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                                <button class="btn" onclick="generateDriverInvite()">
+                                    <i class="fas fa-user"></i>
+                                    Sofőr meghívó
+                                </button>
+                                <button class="btn" onclick="generateSubcontractorInvite()">
+                                    <i class="fas fa-handshake"></i>
+                                    Alvállalkozó meghívó
+                                </button>
+                                <button class="btn" onclick="generateAdminInvite()">
+                                    <i class="fas fa-user-shield"></i>
+                                    Admin meghívó
+                                </button>
+                                <button class="btn" onclick="generateTrackingLink()">
+                                    <i class="fas fa-eye"></i>
+                                    Nyomkövetés link
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="saveProfile()">
+                            <i class="fas fa-save"></i>
+                            Beállítások mentése
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Error List Section -->
+                <div class="content-section" id="error-list-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Hiba lista</h2>
+                        <p class="card-subtitle">Sofőrök által jelentett hibák és karbantartási igények</p>
+                        
+                        <button class="btn" onclick="addNewError()" style="margin-bottom: 2rem;">
+                            <i class="fas fa-plus"></i>
+                            Új hiba jelentése
+                        </button>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Dátum</th>
+                                    <th>Jármű</th>
+                                    <th>Sofőr</th>
+                                    <th>Hiba típusa</th>
+                                    <th>Leírás</th>
+                                    <th>Prioritás</th>
+                                    <th>Státusz</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2025.06.25</td>
+                                    <td>ABC-123</td>
+                                    <td>Kovács István</td>
+                                    <td>Gumi</td>
+                                    <td>Első jobb kerék kopott</td>
+                                    <td><span class="shipment-status status-warning">Közepes</span></td>
+                                    <td><span class="shipment-status status-waiting">Függőben</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2025.06.24</td>
+                                    <td>GHI-789</td>
+                                    <td>Nagy Péter</td>
+                                    <td>Ponyva</td>
+                                    <td>Kis szakadás a ponyván</td>
+                                    <td><span class="shipment-status status-delivered">Alacsony</span></td>
+                                    <td><span class="shipment-status status-transit">Javítás alatt</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2025.06.23</td>
+                                    <td>MNO-345</td>
+                                    <td>Szabó András</td>
+                                    <td>Motor</td>
+                                    <td>Furcsa zörej motorból</td>
+                                    <td><span class="shipment-status status-danger">Magas</span></td>
+                                    <td><span class="shipment-status status-delivered">Megjavítva</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tracking Section -->
+                <div class="content-section" id="tracking-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Nyomkövetés</h2>
+                        <p class="card-subtitle">Valós idejű járműkövetés és térkép nézet</p>
+                        
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-satellite"></i>
+                                    GPS Rendszer
+                                </div>
+                            </div>
+                            <p>🛰️ A rendszer integrálva van a legmodernebb GPS nyomkövetőkkel. 30 másodpercenként frissülő pozíciók, sebességmérés és geofencing riasztások.</p>
+                        </div>
+                        
+                        <div style="background: var(--glass-bg); border-radius: 16px; padding: 2rem; margin: 2rem 0; text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--glass-border);">
+                            <div>
+                                <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                                <h3>Interaktív térkép</h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Itt jelenne meg a valós idejű térképnézet az összes járművel</p>
+                                <button class="btn" onclick="loadMap()">
+                                    <i class="fas fa-play"></i>
+                                    Térkép betöltése
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #00cc77);">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Online járművek</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--warning), #ff9900);">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value">2</div>
+                                <div class="stat-label">Riasztások</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                                        <i class="fas fa-route"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value">12,547</div>
+                                <div class="stat-label">Mai kilométerek</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weekly Performance Section -->
+                <div class="content-section" id="weekly-performance-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Heti teljesítmény</h2>
+                        <p class="card-subtitle">Heti és kétheti fuvarteljesítmény részletes elemzése</p>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="stat-change positive">+8%</div>
+                                </div>
+                                <div class="stat-value">156</div>
+                                <div class="stat-label">Befejezett fuvarok (hét)</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #00cc77);">
+                                        <i class="fas fa-road"></i>
+                                    </div>
+                                    <div class="stat-change positive">+12%</div>
+                                </div>
+                                <div class="stat-value">87,234</div>
+                                <div class="stat-label">Megtett kilométerek</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--warning), #ff9900);">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="stat-change negative">-3%</div>
+                                </div>
+                                <div class="stat-value">98.2%</div>
+                                <div class="stat-label">Időben teljesítés</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--accent-color), #ff5555);">
+                                        <i class="fas fa-gas-pump"></i>
+                                    </div>
+                                    <div class="stat-change positive">+5%</div>
+                                </div>
+                                <div class="stat-value">7.8L</div>
+                                <div class="stat-label">Átlag fogyasztás/100km</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: var(--glass-bg); border-radius: 16px; padding: 2rem; margin: 2rem 0; text-align: center; min-height: 300px; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--glass-border);">
+                            <div>
+                                <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                                <h3>Teljesítmény grafikon</h3>
+                                <p style="color: var(--text-secondary);">Heti teljesítménymutatók vizuális megjelenítése</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Reports Section -->
+                <div class="content-section" id="financial-reports-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Pénzügyi jelentések</h2>
+                        <p class="card-subtitle">Heti és havi bevétel, kiadás, profit elemzések</p>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #00cc77);">
+                                        <i class="fas fa-euro-sign"></i>
+                                    </div>
+                                    <div class="stat-change positive">+15%</div>
+                                </div>
+                                <div class="stat-value">€89.2K</div>
+                                <div class="stat-label">Heti bevétel</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--accent-color), #ff5555);">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <div class="stat-change positive">+3%</div>
+                                </div>
+                                <div class="stat-value">€67.8K</div>
+                                <div class="stat-label">Heti kiadás</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetEgo Agent Office - Dashboard</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='8' fill='none' stroke='%2300d4aa' stroke-width='4'/%3E%3Ccircle cx='70' cy='30' r='8' fill='none' stroke='%2300d4aa' stroke-width='4'/%3E%3Ccircle cx='50' cy='70' r='8' fill='none' stroke='%2300d4aa' stroke-width='4'/%3E%3Cline x1='30' y1='30' x2='70' y2='30' stroke='%2300d4aa' stroke-width='4'/%3E%3Cline x1='30' y1='30' x2='50' y2='70' stroke='%2300d4aa' stroke-width='4'/%3E%3Cline x1='70' y1='30' x2='50' y2='70' stroke='%2300d4aa' stroke-width='4'/%3E%3C/svg%3E">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4aa;
+            --secondary-color: #00a0db;
+            --accent-color: #ff6b6b;
+            --dark-bg: #0a0e27;
+            --darker-bg: #050816;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --sidebar-width: 300px;
+            --success: #00ff88;
+            --warning: #ffb800;
+            --danger: #ff4757;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--darker-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a1a3e 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2300d4aa" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-20px) translateY(-20px); }
+        }
+
+        /* Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-modal.hidden {
+            display: none;
+        }
+
+        .login-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        .login-logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.3);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-260px);
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.3);
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .menu-item {
+            margin: 0.5rem 1rem;
+        }
+
+        .menu-toggle {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 1rem;
+            text-align: left;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .menu-toggle:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+        .menu-toggle.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.3);
+        }
+
+        .menu-icon {
+            margin-right: 0.75rem;
+            width: 16px;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .submenu.active {
+            max-height: 500px;
+        }
+
+        .submenu-item {
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0.25rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .submenu-item:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+        .submenu-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 40px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .menu-toggle-btn:hover {
+            background: var(--glass-bg);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+
+        .logout-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 2rem;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* AI Messages */
+        .ai-messages {
+            margin-bottom: 2rem;
+        }
+
+        .ai-message {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .ai-message:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .ai-message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-ai {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: color 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .close-ai:hover {
+            color: var(--text-primary);
+            background: var(--glass-bg);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 212, 170, 0.2);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stat-change {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .stat-change.positive {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            background: rgba(255, 71, 87, 0.2);
+            color: var(--danger);
+        }
+
+        /* Active Shipments */
+        .active-shipments {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .archive-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .archive-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .shipment-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .shipment-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(5px);
+        }
+
+        .shipment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .shipment-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .shipment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-waiting {
+            background: rgba(255, 184, 0, 0.2);
+            color: var(--warning);
+        }
+
+        .status-loaded {
+            background: rgba(0, 160, 219, 0.2);
+            color: var(--secondary-color);
+        }
+
+        .status-transit {
+            background: rgba(0, 212, 170, 0.2);
+            color: var(--primary-color);
+        }
+
+        .status-delivered {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
+        }
+
+        .shipment-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-icon {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .detail-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .data-table th {
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .data-table td {
+            color: var(--text-secondary);
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            background: var(--glass-bg);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            max-width: 70%;
+            border: 1px solid var(--glass-border);
+        }
+
+        .message.sent .message-bubble {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 2000;
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .dashboard-content {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shipment-details {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-info {
+                gap: 0.5rem;
+            }
+
+            .user-info span {
+                display: none;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <div class="login-logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="8" fill="none" stroke="white" stroke-width="4"/>
+                    <circle cx="70" cy="30" r="8" fill="none" stroke="white" stroke-width="4"/>
+                    <circle cx="50" cy="70" r="8" fill="none" stroke="white" stroke-width="4"/>
+                    <line x1="30" y1="30" x2="70" y2="30" stroke="white" stroke-width="4"/>
+                    <line x1="30" y1="30" x2="50" y2="70" stroke="white" stroke-width="4"/>
+                    <line x1="70" y1="30" x2="50" y2="70" stroke="white" stroke-width="4"/>
+                    <line x1="38" y1="22" x2="85" y2="15" stroke="white" stroke-width="3"/>
+                    <circle cx="20" cy="20" r="3" fill="white"/>
+                    <circle cx="80" cy="50" r="3" fill="white"/>
+                    <circle cx="35" cy="85" r="3" fill="white"/>
+                </svg>
+            </div>
+            <h2 class="login-title">FleetEgo Agent Office</h2>
+            <p class="login-subtitle">AI-alapú fuvarszervező és TMS rendszer</p>
+            
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="username">Felhasználónév</label>
+                    <input type="text" id="username" name="username" placeholder="admin" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Jelszó</label>
+                    <input type="password" id="password" name="password" placeholder="1234" required>
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Bejelentkezés
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="8" fill="none" stroke="white" stroke-width="4"/>
+                        <circle cx="70" cy="30" r="8" fill="none" stroke="white" stroke-width="4"/>
+                        <circle cx="50" cy="70" r="8" fill="none" stroke="white" stroke-width="4"/>
+                        <line x1="30" y1="30" x2="70" y2="30" stroke="white" stroke-width="4"/>
+                        <line x1="30" y1="30" x2="50" y2="70" stroke="white" stroke-width="4"/>
+                        <line x1="70" y1="30" x2="50" y2="70" stroke="white" stroke-width="4"/>
+                        <line x1="38" y1="22" x2="85" y2="15" stroke="white" stroke-width="3"/>
+                        <circle cx="20" cy="20" r="3" fill="white"/>
+                        <circle cx="80" cy="50" r="3" fill="white"/>
+                        <circle cx="35" cy="85" r="3" fill="white"/>
+                    </svg>
+                </div>
+                <div class="logo-text">FleetEgo Office</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Fuvarok Menu -->
+                <div class="menu-item">
+                    <button class="menu-toggle active" onclick="toggleMenu('fuvarok')">
+                        <span><i class="fas fa-truck menu-icon"></i>Fuvarok</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu active" id="fuvarok-submenu">
+                        <div class="submenu-item active" onclick="showSection('dashboard')">
+                            <i class="fas fa-tachometer-alt menu-icon"></i>Aktív fuvarok
+                        </div>
+                        <div class="submenu-item" onclick="showSection('completed-shipments')">
+                            <i class="fas fa-check-circle menu-icon"></i>Befejezett fuvarok
+                        </div>
+                        <div class="submenu-item" onclick="showSection('upload-shipments')">
+                            <i class="fas fa-upload menu-icon"></i>Fuvarfeltöltés
+                        </div>
+                        <div class="submenu-item" onclick="showSection('search-shipments')">
+                            <i class="fas fa-search menu-icon"></i>Fuvarkeresés
+                        </div>
+                        <div class="submenu-item" onclick="showSection('trailer-status')">
+                            <i class="fas fa-trailer menu-icon"></i>Pótkocsiallapot
+                        </div>
+                        <div class="submenu-item" onclick="showSection('route-planning')">
+                            <i class="fas fa-route menu-icon"></i>Fuvartervezés
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sofőrök Menu -->
+                <div class="menu-item">
+                    <button class="menu-toggle" onclick="toggleMenu('soforok')">
+                        <span><i class="fas fa-users menu-icon"></i>Sofőrök</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="soforok-submenu">
+                        <div class="submenu-item" onclick="showSection('driver-assignment')">
+                            <i class="fas fa-user-plus menu-icon"></i>Sofőr hozzárendelés
+                        </div>
+                        <div class="submenu-item" onclick="showSection('shipment-assignment')">
+                            <i class="fas fa-tasks menu-icon"></i>Fuvar hozzárendelés
+                        </div>
+                        <div class="submenu-item" onclick="showSection('driver-stats')">
+                            <i class="fas fa-chart-bar menu-icon"></i>Fuvarstatisztika
+                        </div>
+                        <div class="submenu-item" onclick="showSection('driver-chat')">
+                            <i class="fas fa-comments menu-icon"></i>Sofőr chat
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alvállalkozó Menu -->
+                <div class="menu-item">
+                    <button class="menu-toggle" onclick="toggleMenu('alvallalkozo')">
+                        <span><i class="fas fa-handshake menu-icon"></i>Alvállalkozó</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="alvallalkozo-submenu">
+                        <div class="submenu-item" onclick="showSection('subcontractors')">
+                            <i class="fas fa-building menu-icon"></i>Alvállalkozók
+                        </div>
+                        <div class="submenu-item" onclick="showSection('subcontractor-chat')">
+                            <i class="fas fa-comment-dots menu-icon"></i>Alvállalkozói chat
+                        </div>
+                        <div class="submenu-item" onclick="showSection('subcontractor-assignment')">
+                            <i class="fas fa-clipboard-list menu-icon"></i>Fuvar hozzárendelés
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rendszer Menu -->
+                <div class="menu-item">
+                    <button class="menu-toggle" onclick="toggleMenu('rendszer')">
+                        <span><i class="fas fa-cogs menu-icon"></i>Rendszer</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="rendszer-submenu">
+                        <div class="submenu-item" onclick="showSection('incoming-invoices')">
+                            <i class="fas fa-file-invoice menu-icon"></i>Bejövő számlák
+                        </div>
+                        <div class="submenu-item" onclick="showSection('outgoing-invoices')">
+                            <i class="fas fa-file-export menu-icon"></i>Kimenő számlák
+                        </div>
+                        <div class="submenu-item" onclick="showSection('partners')">
+                            <i class="fas fa-users-cog menu-icon"></i>Partnerek
+                        </div>
+                        <div class="submenu-item" onclick="showSection('profile')">
+                            <i class="fas fa-user-circle menu-icon"></i>Profil
+                        </div>
+                        <div class="submenu-item" onclick="showSection('error-list')">
+                            <i class="fas fa-exclamation-triangle menu-icon"></i>Hiba lista
+                        </div>
+                        <div class="submenu-item" onclick="showSection('tracking')">
+                            <i class="fas fa-map-marked-alt menu-icon"></i>Nyomkövetés
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statisztika Menu -->
+                <div class="menu-item">
+                    <button class="menu-toggle" onclick="toggleMenu('statisztika')">
+                        <span><i class="fas fa-chart-line menu-icon"></i>Statisztika</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="statisztika-submenu">
+                        <div class="submenu-item" onclick="showSection('weekly-performance')">
+                            <i class="fas fa-calendar-week menu-icon"></i>Heti teljesítmény
+                        </div>
+                        <div class="submenu-item" onclick="showSection('financial-reports')">
+                            <i class="fas fa-chart-pie menu-icon"></i>Pénzügyi jelentések
+                        </div>
+                        <div class="submenu-item" onclick="showSection('tachograph-data')">
+                            <i class="fas fa-tachometer-alt menu-icon"></i>Tachográf adatok
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dokumentumok Menu -->
+                <div class="menu-item">
+                    <button class="menu-toggle" onclick="toggleMenu('dokumentumok')">
+                        <span><i class="fas fa-folder menu-icon"></i>Dokumentumok</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="dokumentumok-submenu">
+                        <div class="submenu-item" onclick="showSection('cmr-documents')">
+                            <i class="fas fa-file-contract menu-icon"></i>CMR dokumentumok
+                        </div>
+                        <div class="submenu-item" onclick="showSection('trip-settlements')">
+                            <i class="fas fa-calculator menu-icon"></i>Járatelszámolások
+                        </div>
+                        <div class="submenu-item" onclick="showSection('shipment-orders')">
+                            <i class="fas fa-file-alt menu-icon"></i>Fuvarmegbízások
+                        </div>
+                        <div class="submenu-item" onclick="showSection('invoices-pdf')">
+                            <i class="fas fa-file-pdf menu-icon"></i>Számlák PDF
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Egyéb Menu -->
+                <div class="menu-item">
+                    <button class="menu-toggle" onclick="toggleMenu('egyeb')">
+                        <span><i class="fas fa-ellipsis-h menu-icon"></i>Egyéb</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="submenu" id="egyeb-submenu">
+                        <div class="submenu-item" onclick="showSection('legal-guide')">
+                            <i class="fas fa-gavel menu-icon"></i>Jogi kisokos
+                        </div>
+                        <div class="submenu-item" onclick="showSection('technical-inspection')">
+                            <i class="fas fa-tools menu-icon"></i>Műszaki vizsga
+                        </div>
+                        <div class="submenu-item" onclick="showSection('maintenance-schedule')">
+                            <i class="fas fa-calendar-check menu-icon"></i>Karbantartási ütemterv
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Header -->
+            <header class="header">
+                <button class="menu-toggle-btn" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="header-title">FleetEgo Agent Office</h1>
+                <div class="user-info">
+                    <div class="user-avatar">A</div>
+                    <span>Admin</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Kijelentkezés
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Dashboard Section -->
+                <div class="content-section active" id="dashboard-section">
+                    <!-- Welcome Section -->
+                    <div class="welcome-section">
+                        <h2 class="welcome-title">Üdvözlünk újra, Admin!</h2>
+                        <p class="welcome-subtitle">Jó reggelt! Minden készen áll a mai napra. A flottád kiváló állapotban van!</p>
+                    </div>
+
+                    <!-- AI Messages -->
+                    <div class="ai-messages" id="aiMessages">
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-robot"></i>
+                                    AI Asszisztens
+                                </div>
+                                <button class="close-ai" onclick="closeAiMessage(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <p>🌟 <strong>Inspiráló gondolat a napra:</strong> A te munkád nem csak áruszállítás - híd vagy a gazdaság különböző pontjai között. Minden egyes fuvar, amit megszervezel, hozzájárul az országok és emberek összekapcsolásához!</p>
+                        </div>
+
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-lightbulb"></i>
+                                    Optimalizálási javaslat
+                                </div>
+                                <button class="close-ai" onclick="closeAiMessage(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <p>💡 A mai napon 2 fuvar optimalizálható egy kombinált útvonallá, ezzel 320 km-t és 8 órát spórolhatsz meg. Minden egyes ilyen döntéssel egyre profibbá válsz!</p>
+                        </div>
+
+                        <div class="ai-message">
+                            <div class="ai-message-header">
+                                <div class="ai-badge">
+                                    <i class="fas fa-heart"></i>
+                                    Motivációs üzenet
+                                </div>
+                                <button class="close-ai" onclick="closeAiMessage(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <p>❤️ Emlékezz rá: minden nap, amikor felkelsz és elkezdel dolgozni, számtalan ember életét teszed könnyebbé azzal, hogy biztosítod, hogy az áruk eljussanak a helyükre. Ez valódi különbség!</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="stat-change positive">+12%</div>
+                            </div>
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Aktív fuvarok</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #00cc77);">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="stat-change positive">+8%</div>
+                            </div>
+                            <div class="stat-value">156</div>
+                            <div class="stat-label">Befejezett fuvarok (hét)</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, var(--warning), #ff9900);">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-change positive">+3%</div>
+                            </div>
+                            <div class="stat-value">18</div>
+                            <div class="stat-label">Aktív sofőrök</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon" style="background: linear-gradient(135deg, var(--accent-color), #ff5555);">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="stat-change positive">+15%</div>
+                            </div>
+                            <div class="stat-value">€89.2K</div>
+                            <div class="stat-label">Heti bevétel</div>
+                        </div>
+                    </div>
+
+                    <!-- Active Shipments -->
+                    <div class="active-shipments">
+                        <div class="section-header">
+                            <h3 class="section-title">Aktív fuvarok</h3>
+                            <button class="archive-btn" onclick="archiveCompletedShipments()">
+                                <i class="fas fa-archive"></i>
+                                Befejezettek archiválása
+                            </button>
+                        </div>
+
+                        <div class="shipment-card">
+                            <div class="shipment-header">
+                                <div class="shipment-date">2025. június 25.</div>
+                                <div class="shipment-status status-transit">Úton</div>
+                            </div>
+                            <div class="shipment-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-truck detail-icon"></i>
+                                    <span class="detail-text">Vontató: ABC-123 | Pótkocsi: DEF-456</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user detail-icon"></i>
+                                    <span class="detail-text">Sofőr: Kovács István</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-arrow-up detail-icon"></i>
+                                    <span class="detail-text">Felrakás: Metro Budapest raktár – 08:00</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-arrow-down detail-icon"></i>
+                                    <span class="detail-text">Lerakás: Lidl München központ – Holnap 10:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="shipment-card">
+                            <div class="shipment-header">
+                                <div class="shipment-date">2025. június 25.</div>
+                                <div class="shipment-status status-loaded">Felrakva</div>
+                            </div>
+                            <div class="shipment-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-truck detail-icon"></i>
+                                    <span class="detail-text">Vontató: GHI-789 | Pótkocsi: JKL-012</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user detail-icon"></i>
+                                    <span class="detail-text">Sofőr: Nagy Péter</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-arrow-up detail-icon"></i>
+                                    <span class="detail-text">Felrakás: Tesco Debrecen raktár – 14:00</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-arrow-down detail-icon"></i>
+                                    <span class="detail-text">Lerakás: Carrefour Bécs – Holnap 06:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="shipment-card">
+                            <div class="shipment-header">
+                                <div class="shipment-date">2025. június 25.</div>
+                                <div class="shipment-status status-waiting">Felvételre vár</div>
+                            </div>
+                            <div class="shipment-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-truck detail-icon"></i>
+                                    <span class="detail-text">Vontató: MNO-345 | Pótkocsi: PQR-678</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-user detail-icon"></i>
+                                    <span class="detail-text">Sofőr: Szabó András</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-arrow-up detail-icon"></i>
+                                    <span class="detail-text">Felrakás: IKEA Győr raktár – Holnap 09:00</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-arrow-down detail-icon"></i>
+                                    <span class="detail-text">Lerakás: IKEA Prága – Holnap 18:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Shipments Section -->
+                <div class="content-section" id="completed-shipments-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Befejezett fuvarok</h2>
+                        <p class="card-subtitle">Az elmúlt 30 napban befejezett fuvarok áttekintése</p>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Dátum</th>
+                                    <th>Útvonal</th>
+                                    <th>Sofőr</th>
+                                    <th>Jármű</th>
+                                    <th>Státusz</th>
+                                    <th>Bevétel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2025.06.24</td>
+                                    <td>Budapest → Berlin</td>
+                                    <td>Kovács István</td>
+                                    <td>ABC-123</td>
+                                    <td><span class="shipment-status status-delivered">Leszállítva</span></td>
+                                    <td>€2,450</td>
+                                </tr>
+                                <tr>
+                                    <td>2025.06.24</td>
+                                    <td>Szeged → Milánó</td>
+                                    <td>Nagy Péter</td>
+                                    <td>GHI-789</td>
+                                    <td><span class="shipment-status status-delivered">Leszállítva</span></td>
+                                    <td>€3,200</td>
+                                </tr>
+                                <tr>
+                                    <td>2025.06.23</td>
+                                    <td>Győr → Párizs</td>
+                                    <td>Szabó András</td>
+                                    <td>MNO-345</td>
+                                    <td><span class="shipment-status status-delivered">Leszállítva</span></td>
+                                    <td>€2,890</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Upload Shipments Section -->
+                <div class="content-section" id="upload-shipments-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Fuvarfeltöltés</h2>
+                        <p class="card-subtitle">Fuvarok feltöltése a Timocom börze API-n keresztül</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="api-key">Timocom API kulcs</label>
+                                <input type="password" id="api-key" placeholder="Adja meg az API kulcsot">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipment-type">Fuvar típusa</label>
+                                <select id="shipment-type">
+                                    <option value="FTL">FTL (Teljes kamion)</option>
+                                    <option value="LTL">LTL (Részleges rakodás)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="pickup-location">Felrakóhely</label>
+                                <input type="text" id="pickup-location" placeholder="Város, ország">
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery-location">Lerakóhely</label>
+                                <input type="text" id="delivery-location" placeholder="Város, ország">
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="pickup-date">Felrakás dátuma</label>
+                                <input type="datetime-local" id="pickup-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery-date">Lerakás dátuma</label>
+                                <input type="datetime-local" id="delivery-date">
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="uploadShipment()">
+                            <i class="fas fa-upload"></i>
+                            Fuvar feltöltése
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Shipments Section -->
+                <div class="content-section" id="search-shipments-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Fuvarkeresés</h2>
+                        <p class="card-subtitle">Fuvarok keresése a Timocom börzén AI optimalizációval</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="search-from">Honnan</label>
+                                <input type="text" id="search-from" placeholder="Kiindulási pont">
+                            </div>
+                            <div class="form-group">
+                                <label for="search-to">Hová</label>
+                                <input type="text" id="search-to" placeholder="Célállomás">
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="truck-type">Jármű típus</label>
+                                <select id="truck-type">
+                                    <option value="any">Bármilyen</option>
+                                    <option value="tautliner">Ponyvás</option>
+                                    <option value="refrigerated">Hűtős</option>
+                                    <option value="flatbed">Platós</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="max-weight">Max. súly (tonna)</label>
+                                <input type="number" id="max-weight" placeholder="24" min="1" max="40">
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="searchShipments()">
+                            <i class="fas fa-search"></i>
+                            Fuvarok keresése
+                        </button>
+                        
+                        <div id="search-results" style="margin-top: 2rem;">
+                            <!-- Search results will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trailer Status Section -->
+                <div class="content-section" id="trailer-status-section">
+                    <div class="content-card">
+                        <h2 class="card-title">Pótkocsiallapot</h2>
+                        <p class="card-subtitle">Pótkocsi státuszok és elhelyezkedés</p>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), #00cc77);">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Rakott pótkocsi</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <div class="stat-icon" style="background: linear-gradient(135deg, var(--warning), #ff9900);">
+                                        <i class="fas fa-truck-loading"></i>
+                                    </div>
+                
