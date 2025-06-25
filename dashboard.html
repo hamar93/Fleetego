@@ -4,160 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FleetEgo Dashboard</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: #0a0e27;
-      color: white;
-    }
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 280px;
-      height: 100vh;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(15px);
-      padding: 2rem 1rem;
-      overflow-y: auto;
-    }
-    .sidebar h2 {
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
-      color: #00d4aa;
-    }
-    .menu-section {
-      margin-bottom: 2rem;
-    }
-    .menu-section h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: #00a0db;
-    }
-    .menu-section ul {
-      list-style: none;
-      padding: 0;
-    }
-    .menu-section ul li {
-      padding: 0.4rem 0.5rem;
-      margin-bottom: 0.2rem;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: 0.2s;
-    }
-    .menu-section ul li:hover {
-      background: rgba(0,212,170,0.2);
-    }
-    .main {
-      margin-left: 280px;
-      padding: 2rem;
-    }
-    .card {
-      background: rgba(255,255,255,0.05);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      border-radius: 10px;
-    }
-    .card h4 {
-      margin-top: 0;
-      color: #00d4aa;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <aside class="sidebar">
     <h2>FleetEgo Office</h2>
-
-    <div class="menu-section">
-      <h3>Fuvarok</h3>
-      <ul>
-        <li>Aktív fuvarok</li>
-        <li>Befejezett fuvarok</li>
-        <li>Fuvarfeltöltés</li>
-        <li>Fuvarkeresés</li>
-        <li>Pótkocsi állapot</li>
-        <li>Fuvartervezés</li>
-        <li>Útdíj kalkuláció</li>
-      </ul>
-    </div>
-
-    <div class="menu-section">
-      <h3>Sofőrök</h3>
-      <ul>
-        <li>Sofőr hozzárendelés</li>
-        <li>Fuvar hozzárendelés</li>
-        <li>Fuvarstatisztika</li>
-        <li>Sofőr chat</li>
-      </ul>
-    </div>
-
-    <div class="menu-section">
-      <h3>Alvállalkozó</h3>
-      <ul>
-        <li>Alvállalkozók adatai</li>
-        <li>Alvállalkozói chat</li>
-        <li>Fuvar hozzárendelés / Állapot</li>
-      </ul>
-    </div>
-
-    <div class="menu-section">
-      <h3>Rendszer</h3>
-      <ul>
-        <li>Bejövő számlák</li>
-        <li>Kimenő számlák</li>
-        <li>Partnerek</li>
-        <li>Profil és AI státusz</li>
-        <li>Hibalista</li>
-        <li>Műszaki vizsga nyilvántartás</li>
-        <li>Nyomkövetés (valós idejű)</li>
-      </ul>
-    </div>
-
-    <div class="menu-section">
-      <h3>Statisztika</h3>
-      <ul>
-        <li>Heti/kétheti fuvar teljesítmény</li>
-        <li>Bevétel–kiadás kimutatások</li>
-        <li>Tachográf adatok</li>
-      </ul>
-    </div>
-
-    <div class="menu-section">
-      <h3>Dokumentumok</h3>
-      <ul>
-        <li>CMR feltöltések</li>
-        <li>Járatelszámolás, menetlevél</li>
-        <li>Számlák (PDF)</li>
-        <li>Fuvarmegbízások</li>
-      </ul>
-    </div>
-
-    <div class="menu-section">
-      <h3>Egyéb</h3>
-      <ul>
-        <li>Jogi kisokos</li>
-      </ul>
-    </div>
+    <nav>
+      <a href="dashboard.html" class="active">Kezdőlap</a>
+      <a href="fuvarok.html">Fuvarok</a>
+      <a href="soforok.html">Sofőrök</a>
+      <a href="alvallalkozok.html">Alvállalkozók</a>
+      <a href="rendszer.html">Rendszer</a>
+      <a href="statisztika.html">Statisztika</a>
+      <a href="dokumentumok.html">Dokumentumok</a>
+      <a href="egyeb.html">Egyéb</a>
+    </nav>
   </aside>
 
-  <main class="main">
-    <div class="card">
-      <h4>Üdv újra, @felhasználónév</h4>
-      <p>Inspiráló AI üzenet: "Minden fuvar egy új lehetőség."</p>
-    </div>
+  <main>
+    <h1>FleetEgo Admin Panel</h1>
 
-    <div class="card">
-      <h4>Aktív Fuvar</h4>
+    <section class="ai-message">
+      <strong>AI üzenet:</strong> „A rendszer figyel, hogy te előre haladhass.”
+    </section>
+
+    <section>
+      <h2>Gyors áttekintés</h2>
       <ul>
-        <li>Dátum: 2025-04-24</li>
-        <li>Vontató: ABC-123 | Pótkocsi: DEF-456</li>
-        <li>Felrakás: Metro Budapest – 2025-04-24 08:00</li>
-        <li>Lerakás: Lidl München – 2025-04-25 10:00</li>
-        <li>Állapot: Úton</li>
+        <li>Aktív fuvarok: <strong>12</strong></li>
+        <li>Várakozó rendelés: <strong>3</strong></li>
+        <li>Online sofőrök: <strong>7</strong></li>
+        <li>Üres pótkocsik: <strong>4</strong></li>
       </ul>
-    </div>
+    </section>
+
+    <section>
+      <h2>Legutóbbi események</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Dátum</th>
+            <th>Esemény</th>
+            <th>Részletek</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025-06-25</td>
+            <td>Új fuvar indult</td>
+            <td>Budapest → Linz | Sofőr: Kiss József</td>
+          </tr>
+          <tr>
+            <td>2025-06-24</td>
+            <td>Pótkocsi hibajelzés</td>
+            <td>Rendszám: DEF-123 | Fékhiba</td>
+          </tr>
+          <tr>
+            <td>2025-06-23</td>
+            <td>Dokumentum feltöltve</td>
+            <td>CMR – 2025-06-23-MUC</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </main>
 </body>
 </html>
