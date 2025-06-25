@@ -1,0 +1,95 @@
+/* Alap stílusok */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0a0e27;
+  color: #ffffff;
+  display: flex;
+}
+
+/* Oldalsó menü (sidebar) */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  color: #00d4aa;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar nav a {
+  display: block;
+  color: #ccc;
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.2s;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  color: #00d4aa;
+  font-weight: bold;
+}
+
+/* Fő tartalom */
+main {
+  margin-left: 270px;
+  padding: 30px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+h1, h2 {
+  color: #00d4aa;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+/* AI üzenet box */
+.ai-message {
+  background: rgba(0, 212, 170, 0.1);
+  border-left: 5px solid #00d4aa;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 6px;
+}
+
+/* Táblázatok */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.data-table thead {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  text-align: left;
+}
+
+.data-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
